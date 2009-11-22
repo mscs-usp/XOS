@@ -1,0 +1,21 @@
+#global definitions
+
+#PROXY=http://proxypac.edf.fr:3128
+PROXY=noProxy
+
+NTP=localhost
+
+GLOBALVOPSIP=127.0.0.1      
+SCALARISBOOTIP=127.0.0.1      
+OWBOOTSTRAPIP=127.0.0.1      
+RSSBOOTSTRAPIP=127.0.0.1      
+DIXIROOTHOST=localhost
+DIXIROOTIP=127.0.0.1      
+DIRHOSTIP=127.0.0.1      
+MRCHOSTIP=127.0.0.1      
+OSDHOSTIP=127.0.0.1      
+USESSL=false
+
+
+
+  
