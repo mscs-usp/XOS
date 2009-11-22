@@ -38,7 +38,7 @@ PAM:fail in mapping connect !
          *                            -gidmax <num> -gidmin <num> *
 Oops: Permission denied
 
-VO=920f6b8b-0000-45f1-a5f2-e0302f45b7fe
+VO=b93c2036-4c22-48d2-8699-b285ebc50d69
 
 
 xos-policy-admin-am -vo $VO  --force
@@ -56,8 +56,8 @@ EOF
  cp /home/sk/.ssh/config-xos /home/sk/.ssh/config
 
 #must remove w from group (due to umask?)
-chmod g-w .ssh/config-xos
-chmod g-w .ssh/config
+chmod g-w /home/sk/.ssh/config-xos
+chmod g-w /home/sk/.ssh/config
 
 ssh-xos localhost
 Last login: Tue Dec  2 16:39:02 2008 from paraxos5.irisa.fr
@@ -65,7 +65,7 @@ whoami
 #/CN=584fddf7-69ae-47cc-b864-78f76e836aac
 pwd
 #/home/584fddf7-69ae-47cc-b864-78f76e836aac
-cat > MyFirstFile < EOF
+cat > MyFirstFile << EOF
 abc
 EOF
 
