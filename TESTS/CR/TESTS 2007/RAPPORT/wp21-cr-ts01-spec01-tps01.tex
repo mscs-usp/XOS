@@ -1,0 +1,82 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\starttps{wp21-cr-ts01-spec01-tps01}\\
+%Specify the unique identifier assigned to this test procedure specification.
+\noindent\textbf{Test design specification reference: \refexpdoc{wp21-cr-ts01-spec01-tds01}} \\%Supply a reference (identifier) to the associated test design specification.
+\noindent\textbf{Test case specification reference: \refexpdoc{wp21-cr-ts01-spec01-tcs01}} \\
+\noindent\textbf{Test log identifier: \refexpdoc{wp21-cr-ts01-spec01-tl01}} %insert file name here without extension '.tex'
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+%Describe the purpose of this procedure. If this procedure executes any test cases, provide a reference for each
+%of them.
+%In addition, provide references to relevant sections of the test item documentation (e.g., references to usage
+%procedures).
+The purpose of this test is to see how the checkpointer module will handle a multi-threaded Java application.
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+\begin{itemize}
+\item Download the latest (as of 25-09-07) BCLR module v0.6.1 from\newline
+	\href{http://ftg.lbl.gov/CheckpointRestart/CheckpointDownloads.shtml}{http://ftg.lbl.gov/CheckpointRestart/CheckpointDownloads.shtml}.
+\item Untar the package and enter the installation directory.
+\item Configure for the version of Linux currently being used with a command such as\\ {\tt ./configure --with-linux=/usr/src/linux-2.6.15}
+\item Perform the {\tt make} command.
+\item Check that the module has been created correctly; {\tt make insmod check }
+\item If so, install the module; {\tt make install } (root password required)
+\item Update the LD\_LIBRARY\_PATH if needed:\\
+ \mbox{\footnotesize\tt export LD\_LIBRARY\_PATH=\$LD\_LIBRARY\_PATH:/usr/local/lib }
+\end{itemize}
+
+\paragraph{Start}
+%Describe the actions necessary to begin execution of the procedure.
+\begin{itemize}
+\item Check that the BLCR modules are inserted properly. {\tt lsmod } will display blcr, blcr\_vmadump and blcr\_imports if they are there.
+\item Run {\tt make insmod} command from the installation directory if they are not there already (requires root).
+\item Start the Java application using {\tt cr\_run }. The entire command will look something like this:\\{\tt cr\_run java -jar myThreadedTest.jar}
+\end{itemize}
+
+
+\paragraph{Proceed}
+%Describe any actions necessary during execution of the procedure.
+\begin{itemize}
+\item While the application is running determine its PID using {\tt ps }.
+\item Run the BLCR checkpoint command\\
+	{\tt cr\_checkpoint [options] PID}\\
+	where OPTIONS should be a Linux signal such as term or kill, and the PID used is the one previously determined.
+\item Check that the checkpoint file was created in the current directory. It will be called 'context.PID'.
+\item Restart the application from the checkpoint using the command\\
+	{\tt cr\_restart context.PID }.
+\item Observe that the application finishes correctly.
+\end{itemize}
+
+\paragraph{Shut Down}
+%Describe the actions necessary to suspend testing, when unscheduled events dictate.
+The severity of the error messages will dictate whether the test needs to be suspended.
+
+\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+The Java application was written to stop after a predetermined time.

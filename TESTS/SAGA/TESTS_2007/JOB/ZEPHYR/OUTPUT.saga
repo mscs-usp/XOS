@@ -1,0 +1,44 @@
+running /home/kortas/XTREEMOS/TESTS/SAGA/JOB/ZEPHYR/./zephyr on 1 LINUX ch_gen2 processors
+  Initialization successfully completed for            1  tasks
+ ***********************************
+ *                                 *
+ *  Alize v 0.4 (10 Janvier 1997)  *
+ *                                 *
+ ***********************************
+ >> 
+ >> Execution sur : ????
+ >> 
+ >> Solution test :   Bipole
+ >>
+ >> Viscosite     :     0.100000000000000     
+ >>
+ >> tau         =   3.125000000000000E-003
+ >> dx          =   1.953125000000000E-003        ou lm =          511
+ >> dy          =   1.953125000000000E-003        ou nm =          511
+ >>
+ >> Maillage     --> grille B  
+ >>
+ >> Termes diffusifs  traites implicitement
+ >> Termes convectifs traites implicitement
+ >> Guess Initial --> Richardson
+ >>
+ >> integration temporelle d'ordre  :            4
+ >>
+ >> Solveur                         : BiCGSTAB_1(DF2)
+ >>
+ >> 
+ >> Convergence externe             :   1.000000000000000E-018
+ >> Convergence externe abs         :   1.000000000000000E-010
+ >>
+ >> ===============================================================================
+ >>
+ >> task/nbgrid :      0                0
+ >>
+ >> lmu/lmu_ddm :    511                0
+ >>
+ >> nmu/nmu_ddm :    511                0
+ >>
+ >>
+ >> lmv/lmv_ddm :    511                0
+ >>
+ >> nmv/nmv_ddm :    511                0

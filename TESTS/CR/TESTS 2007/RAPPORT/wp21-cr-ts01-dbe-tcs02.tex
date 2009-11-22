@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test case specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\starttcs{wp21-cr-ts01-dbe-tcs02}{Checkpointing a multithreaded Java application which uses sockets}
+%\noindent\textbf{Test case specification identifier: wp21-cr-ts01-dbe-tcs02}%insert file name here without extension '.tex'
+
+%Purpose:
+%To define a test case identified by a test design specification.
+
+%Outline:
+%A test case specification shall have the following structure:
+%a) Test case specification identifier;
+%b) Test items;
+%c) Input specifications;
+%d) Output specifications;
+%e) Environmental needs;
+%f) Special procedural requirements;
+%g) Intercase dependencies.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test case specification
+%or available to users of the case specification.
+%Since a test case may be referenced by several test design specifications used by different groups over a long
+%time period, enough specific information must be included in the test case specification to permit reuse.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Test Items}
+
+We will test the DBE application. It is a multithreaded application that uses both, client and server sockets. Server sockets remain open and 
+listening while the application is running. This could represent a problem when restarting, cause the kernel is controlling the open resources.
+
+\subsubsection{Input Specifications}
+
+The usual DBE start command, that includes the properties files where third party libraries are located
+
+\subsubsection{Output Specifications}
+
+The output is an infinite loop running application that waits for remote connections and processes them.
+
+\subsubsection{Environmental Needs}
+
+\paragraph{Hardware}
+
+A single x86 machine is required.
+
+\paragraph{Software}
+The following software was used:
+\begin{itemize}
+\item Linux kernel 2.6.14-generic
+\item JRE 1.5.0\_10 from Sun
+\item BLCR 0.6.1 
+\end{itemize}

@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test case specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttcs{wp21-cr-ts01-webas01-tcs02}{CR with WEBAS}
+
+
+%\noindent\textbf{Test case specification identifier: }%insert file name here without extension '.tex'
+
+%Purpose:
+%To define a test case identified by a test design specification.
+
+%Outline:
+%A test case specification shall have the following structure:
+%a) Test case specification identifier;
+%b) Test items;
+%c) Input specifications;
+%d) Output specifications;
+%e) Environmental needs;
+%f) Special procedural requirements;
+%g) Intercase dependencies.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test case specification
+%or available to users of the case specification.
+%Since a test case may be referenced by several test design specifications used by different groups over a long
+%time period, enough specific information must be included in the test case specification to permit reuse.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Test Items}
+%Identify and brie��y describe the items and features to be exercised by this test case.
+%For each item, consider supplying references to the following test item documentation:
+%a) Requirements specification;
+%b) Design specification;
+%c) Users guide;
+%d) Operations guide;
+%e) Installation guide.
+This test will evaluate the checkpointing and restarting mechanism provided by WP2.1. To this end, the SAP WebAS will be used as an example for a complex and large business application.
+
+\subsubsection{Input Specifications}
+%Specify each input required to execute the test case. Some of the inputs will be specified by value (with
+%tolerances where appropriate), while others, such as constant tables or transaction files, will be specified by
+%name. Identify all appropriate databases, files, terminal messages, memory resident areas, and values passed
+%by the operating system.
+%Specify all required relationships between inputs (e.g., timing).
+The application will not have specific input. Aim of the test is to see whether a checkpointing can be performed and the application restarted. Input are some random user clicks to find out whether the application is active.
+
+\subsubsection{Output Specifications}
+%Specify all of the outputs and features (e.g., response time) required of the test items. Provide the exact value
+%(with tolerances where appropriate) for each required output or feature.
+There is no specific output to the system. Just that some tabs can be chosen by users or that some entries can be filled with text. It is more a kind of test whether the system is active at all.
+
+\subsubsection{Environmental Needs}
+
+\paragraph{Hardware}
+%Specify the characteristics and configurations of the hardware required to execute this test case (e.g.,
+%132 character 24 line CRT).
+A single x86\_64 machine with at least 4~GB of RAM and 150~GB of available disc space is required.
+
+\paragraph{Software}
+%Specify the system and application software required to execute this test case. This may include system software
+%such as operating systems, compilers, simulators, and test tools. In addition, the test item may interact
+%with application software.
+The following software is required:
+\begin{itemize}
+\item Linux kernel 2.6.16 or higher
+\item BLCR 0.6.1 with the XtreemOS modifications
+\item SAP WebAS 6.40
+\end{itemize}

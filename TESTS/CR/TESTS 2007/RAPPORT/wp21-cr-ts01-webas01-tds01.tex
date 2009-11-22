@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test design specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttds{wp21-cr-ts01-webas01-tds01}
+
+
+%Specify the unique identifier assigned to this test design specification. 
+%\noindent\textbf{Test design specification identifier: }%insert file name here without extension '.tex'
+\noindent\textbf{Test plan reference: \refexpdoc{wp21-cr-ts01-tp}} %Supply a reference (identifier) to the associated test plan.
+
+%Purpose
+%To specify refinements of the test approach and to identify the features to be tested by this design and its
+%associated tests.
+
+%Outline:
+%A test design specification shall have the following structure:
+%a) Test design specification identifier;
+%b) Features to be tested;
+%c) Approach refinements;
+%d) Test identification;
+%e) Feature pass/fail criteria.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test design specification
+%or available to users of the design specification.
+%Details on the content of each section are contained in the following subclauses.
+
+\subsubsection{Features to be Tested}
+%Identify the test items and describe the features and combinations of features that are the object of this
+%design specification. Other features may be exercised, but need not be identified.
+%For each feature or feature combination, a reference to its associated requirements in the item requirement
+%specification or design description should be included.
+
+The tests for XtreemOS checkpointing and restarting mechanisms are focusing on the following features:
+\begin{enumerate}
+	\item checkpointing of a running application. The corresponding test cases are \refexpdoc{wp21-cr-ts01-webas01-tcs01} and \refexpdoc{wp21-cr-ts01-webas01-tcs02}. Furthermore, these tests address the requirements \ref{req:check_initiation}, \ref{req:check_kernel}, and \ref{req:check_save}.
+	\item restarting the application from the previously stored checkpoint. The corresponding test cases are \refexpdoc{wp21-cr-ts01-webas01-tcs01} and \refexpdoc{wp21-cr-ts01-webas01-tcs02}. Furthermore, these tests address the requirements \ref{req:check_initiation}, \ref{req:check_kernel}, \ref{req:check_save}, and \ref{req:restart_mimic}.
+\end{enumerate}
+
+To summarize, these tests will evaluate the fulfillment of the following requirements from D4.2.3:
+\begin{enumerate}
+	\item full tests: \ref{req:check_kernel}.
+	\item partial tests: \ref{req:check_initiation}, \ref{req:check_save}, and \ref{req:restart_mimic}.
+\end{enumerate}
+
+
+\subsubsection{Approach Refinements}
+%Specify refinements to the approach described in the test plan. Include specific test techniques to be used.
+%The method of analyzing test results should be identified (e.g., comparator programs or visual inspection).
+%Specify the results of any analysis that provides a rationale for test case selection. For example, one might
+%specify conditions that permit a determination of error tolerance (e.g., those conditions that distinguish valid
+%inputs from invalid inputs).
+%Summarize the common attributes of any test cases. This may include input constraints that must be true for
+%every input in the set of associated test cases, any shared environmental needs, any shared special procedural
+%requirements, and any shared case dependencies.
+The initial tests in \refexpdoc{wp21-cr-ts01-webas01-tcs01} are not focused on the SAP WebAS but on two simple applications. The first application provided by the developers of the checkpointing and restarting mechanism is a simple counter on the command line. The second simple application is a standard Linux editor \emph{gedit}. Using these two simple programs should result in a first evaluation of the underlying concept. The tests with the SAP WebAS are performed in \refexpdoc{wp21-cr-ts01-webas01-tcs02}.
+
+As described, the first scenario consists of two tests with relatively simple applications. The first application is a counter on the console which counts from 1 to 100. Our test will checkpoint the running applications. Later we will restart the same application and check whether the program continues to count from the previous number. The second simple test is to see if an opened \emph{gedit} document, with text ('qwert') can be be restarted from checkpoint. This test serves as the first test with some GUI components and file access.
+
+The more complex scenario of checkpointing and restarting a running SAP WebAS is executed last. Here, we can evaluate whether the mechanism can handle open data base connections, static and dynamic libraries and several threads.
+
+
+\subsubsection{Test Identification}
+The test case \refexpdoc{wp21-cr-ts01-webas01-tcs01} will perform the checkpointing and restarting tests using the simple counter program and the \emph{gedit} editor. The test case \refexpdoc{wp21-cr-ts01-webas01-tcs02} uses a running SAP WebAS.
+%List the identifier and a brief description of each test case associated with this design. A particular test case
+%may be identified in more than one test design specification. List the identifier and a brief description of each
+%procedure associated with this test design specification.
+
+
+
+\subsubsection{Feature Pass/Fail Criteria}
+%Specify the criteria to be used to determine whether the feature or feature combination has passed or failed.
+The two individual features, the checkpointing and the restarting of an application cannot be tested independently as we do not have any evaluation tool for the checkpointing than the restart mechanism. Thus, from the application perspective it is only possible to evaluate the combined behavior.
+The tests are successful if the applications can be checkpointed and restarted with no noticeable differences. Anything else will be considered as a failure and reported back to WP2.1. 
+
+In detail, the counting example passes, when the program counts all remaining numbers. The editor example passes when it is still possible to insert some text and to save it as usual. The SAP WebAS example passes the test if it is possible to checkpoint it, to restart it and that users can still access the SAP WebAS and modify individual data.

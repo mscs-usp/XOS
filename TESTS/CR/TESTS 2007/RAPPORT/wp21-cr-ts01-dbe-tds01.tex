@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test design specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\starttds{wp21-cr-ts01-dbe-tds01}\\
+%Specify the unique identifier assigned to this test design specification. 
+%\noindent\textbf{Test design specification identifier: wp21-cr-ts01-dbe-tds01}\\%insert file name here without extension '.tex'
+\noindent\textbf{Test plan reference: \refexpdoc{wp21-cr-ts01-tp}} %Supply a reference (identifier) to the associated test plan.
+
+%Purpose
+%To specify refinements of the test approach and to identify the features to be tested by this design and its
+%associated tests.
+
+%Outline:
+%A test design specification shall have the following structure:
+%a) Test design specification identifier;
+%b) Features to be tested;
+%c) Approach refinements;
+%d) Test identification;
+%e) Feature pass/fail criteria.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test design specification
+%or available to users of the design specification.
+%Details on the content of each section are contained in the following subclauses.
+
+\subsubsection{Features to be Tested}
+In order to test the checkpointing and restart we conduct two tests:
+\begin{enumerate}
+	\item checkpointing a basic Java application with a single thread and no socket connections. 
+After killing the application we will try to restart it again in another machine and context.
+	\item checkpointing a multi-thread application with several threads running at the same time
+and several connections. After killing the application, we will try to restart it again on another
+machine and environment (memory has been freed, connections have been closed, etc). 
+\end{enumerate}
+
+\subsubsection{Approach Refinements}
+The initial tests in \refexpdoc{wp21-cr-ts01-dbe-tcs01} are not focused on the DBE 
+application, that will be used in the second test, but on a more simple 
+Java application.
+
+This first test consists of a standalone application that does not open 
+Input/Output connections, but stores local variables that change 
+time.
+
+
+\subsubsection{Test Identification}
+The test case \refexpdoc{wp21-cr-ts01-dbe-tcs01} will perform the checkpointing and
+restarting tests using a simple auto-increment program. The test case 
+\refexpdoc{wp21-cr-ts01-dbe-tcs02} uses the DBE application
+
+
+\subsubsection{Feature Pass/Fail Criteria}
+The tests will pass if, the application ca be successfully checkpointed and restarted.
+
+In detail, the auto-increment application passes if it maintains the last
+number and can follow the normal process of auto-increment numbers. The second
+test passes if after the restart, the DBE continues normally even if 
+it lost ongoing transactions.
+
+

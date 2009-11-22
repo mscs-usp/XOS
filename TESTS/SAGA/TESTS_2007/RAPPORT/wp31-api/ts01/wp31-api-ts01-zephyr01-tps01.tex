@@ -1,0 +1,248 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\subsection{Test Procedure Specification: Job Management}
+\starttps{wp31-api-ts01-zephyr01-tps01}
+%Specify the unique identifier assigned to this test procedure specification.
+%\noindent\textbf{Test log identifier: wp31-api-ts01-zephyr01-tl01} %insert file name here without extension '.tex'
+
+%\noindent\textbf{Test design specification reference: wp31-api-ts01-zephyr01-tds01} %Supply a reference (identifier) to the associated test design specification.
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+%Describe the purpose of this procedure. If this procedure executes any test cases, provide a reference for each
+%of them.
+%In addition, provide references to relevant sections of the test item documentation (e.g., references to usage
+%procedures).
+
+This procedure executes the test case \refexpdoc{wp31-api-ts01-zephyr01-tcs01}.
+
+%\subsubsection{Special Requirements}
+%Identify any special requirements that are necessary for the execution of this procedure. These may include
+%prerequisite procedures, special skills requirements, and special environmental requirements.
+
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+
+%\paragraph{Log}
+%Describe any special methods or formats for logging the results of test execution, the incidents observed, and
+%any other events pertinent to the test (see Clauses 9 and 10).
+
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+
+The generic test procedure setup includes:
+\begin{itemize}
+\item Installation and compilation of SAGA.
+\item Compiling and running the test program
+\end{itemize}
+
+Installation and compilation of SAGA on Debian Linux etch
+distribution including the following steps:
+\begin{enumerate}
+ \item Download of Boost 1.34.1 
+ \item Compilation of Boost and manual linking of  a shared library.
+ \item Checking out the 0.6 release of SAGA.
+ \item Compilation of SAGA.
+\end{enumerate}
+
+
+
+\paragraph{Start}
+%Describe the actions necessary to begin execution of the procedure.
+
+In order to start the test one needs to perform the following steps:
+\begin{enumerate}
+\item Download, compile and install the 1.34.1 boost C++ library :
+\begin{lstlisting}
+ Download boost_1_34_1.tar.gz  from website http://www.boost.org	
+ cd /home/kortas/BUILD
+ tar xvfz /home/kortas/XTREEMOS/WP4.2/SAGA/boost_1_34_1.tar.gz 
+ cd boost_1_34_1/
+ ./configure --prefix=/home/kortas/SOFTS/boost_34_1
+ make
+ make install
+\end{lstlisting}
+\item Download, compile and install the 0.6 SAGA-A C++ implementation
+\begin{lstlisting}
+ cd /home/kortas/BUILD
+ svn checkout svn co https://svn.cct.lsu.edu/repos/saga/branches/saga-0.6/trunk
+ mv trunk saga-c++-0.6-src
+ export LD_LIBRARY_PATH=/home/kortas/SOFTS/boost_34_1/lib:$LD_LIBRARY_PATH
+ ./configure --with-boost=/home/kortas/SOFTS/boost_34_1 --prefix=/home/kortas/SOFTS/saga-06
+ make
+\end{lstlisting}
+As stated in the release notes, but not on the website, the gcc
+      version used must be 3.4.8 or higher otherwise the
+      code will not compile because of inconsistent C++ headers.
+
+\item Compile the following  test program inspired by the one in \\
+    /home/kortas/BUILD/saga-c++-0.6/examples/packages/job/job\_run.cpp
+      \\
+     and running a Zephyr application.
+\begin{lstlisting}
+//  Copyright (c) 2005-2007 Andre Merzky (andre@merzky.net)
+// 
+//  Distributed under the Boost Software License, Version 1.0. (See accompanying 
+//  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+#include <iostream>
+#include <saga.hpp>
+
+std::string state_to_string (saga::job::state state)
+{
+  switch ( state )
+  {
+    case saga::job::New       : return ("New      ");
+    case saga::job::Running   : return ("Running  ");
+    case saga::job::Suspended : return ("Suspended");
+    case saga::job::Done      : return ("Done     ");
+    case saga::job::Failed    : return ("Failed   ");
+    case saga::job::Canceled  : return ("Canceled ");
+    default                   : 
+        std::cout << "Unknown state: " << state << std::endl;
+        return ("Unknown  ");
+  }
+}
+
+
+
+/////////////
+int main (int argc, char* argv[])
+{
+    namespace attribs = saga::attributes;
+    
+    saga::job_description jd_valid;
+    jd_valid.set_attribute (attribs::job_description_executable,  "/home/kortas/EX/ZEPHYR/SRC/zephyr");
+    
+    saga::job_service s1("any://localhost");
+    
+    saga::job j1 = s1.create_job(jd_valid);
+    saga::job j2 = s1.create_job(jd_valid);
+
+    std::cout << "NOT RUN! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+
+    j1.run();
+    std::cout << "JobID: " << j1.get_job_id() << std::endl;
+    std::cout << "Just RUN! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+
+    j1.suspend();
+    std::cout << "SUSPENDED! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+    
+    j1.resume();
+    std::cout << "RESUMED! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+        
+    
+    std::cout << "NOT DONE! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+    
+    j1.wait();
+
+    std::cout << "AWAITED! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+    
+    sleep(30);
+    std::cout << "should be DONE by now! Job state is: " << state_to_string(j1.get_state()) << std::endl;
+
+    //j1.cancel();
+    
+
+
+    j2.run();
+    std::cout << "JobID: " << j2.get_job_id() << std::endl;
+    std::cout << "Just RUN! Job state is: " << state_to_string(j2.get_state()) << std::endl;
+
+    j2.cancel();
+    std::cout << "CANCELED! Job state is: " << state_to_string(j2.get_state()) << std::endl;
+
+    return 0;
+}
+
+
+
+
+
+
+\end{lstlisting}
+
+using the following makefile
+\begin{lstlisting}
+#  Copyright (c) 2005-2006 Andre Merzky (andre@merzky.net)
+SAGA_ROOT=/home/kortas/SOFTS/BUILD/saga-c++-0.6-src
+
+SAGA_SRC         = main.cpp
+SAGA_BIN         = main
+
+SAGA_ADD_BIN_OBJ = $(SAGA_SRC:%.cpp=%.o)
+
+include $(SAGA_ROOT)/make/saga.application.mk
+\end{lstlisting}
+
+ \item Finally run the test program
+\begin{lstlisting}
+ export LD_LIBRARY_PATH=/home/kortas/SOFTS/saga-06/lib:\
+	/home/kortas/SOFTS/boost_34_1/lib:$LD_LIBRARY_PATH:
+ export SAGA_LOCATION=/home/kortas/SOFTS/saga-06/
+ ./main
+\end{lstlisting}
+\end{enumerate}
+
+
+%\paragraph{Proceed}
+%Describe any actions necessary during execution of the procedure.
+
+%\paragraph{Measure}
+%Describe how the test measurements will be made (e.g., describe how remote terminal response time is to be
+%measured using a network simulator).
+
+%\paragraph{Shut Down}
+%Describe the actions necessary to suspend testing, when unscheduled events dictate.
+
+%\paragraph{Restart}
+%Identify any procedural restart points and describe the actions necessary to restart the procedure at each of
+%these points.
+
+%\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+
+
+%\paragraph{Wrap Up}
+%Describe the actions necessary to restore the environment.
+
+
+\paragraph{Contingencies}
+%Describe the actions necessary to deal with anomalous events that may occur during execution.
+\label{api:contingencies}
+\begin{itemize}
+ \item After  compiling Boost, we also need to manually add an additional link,
+      otherwise SAGA would not link properly with boost searching the
+      library libboost\_serialization-gcc41-mt-d-1\_34\_1.so that
+      did not exist.
+ \item In order to run properly the example bash\_correction in \\
+       /home/kortas/SOFTS/BUILD/saga-c++-0.6-src/example, we need to
+       compile the package logical\_file in \\
+       /home/kortas/SOFTS/BUILD/0.6/examples/packages/logical\_file:
+       and copy by hand the \\
+       libsaga\_package\_logicalfile.so into
+       the /home/kortas/SOFTS/saga-06/lib directory.
+\end{itemize}
+

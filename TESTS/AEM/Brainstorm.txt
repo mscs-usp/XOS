@@ -1,0 +1,6 @@
+
+
+concurrent writting on a same data/file
+
+evaluate performance 
+	 obtaining in reading a file while the number of machines implied in the process grows.

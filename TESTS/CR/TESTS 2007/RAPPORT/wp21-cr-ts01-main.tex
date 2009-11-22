@@ -1,0 +1,72 @@
+\documentclass[twoside,a4paper,11pt]{article}
+\usepackage[colorlinks, bookmarks]{hyperref}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{longtable}
+
+
+\input{../../req-numbers.aux}
+\input{../../common-frontmatter.tex}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Please read the IEEE standard 829-1998 document before starting and describing your experiments.
+% The document is available SVN, file name IEEE829_1998.pdf
+% The XtreemOS evaluation reports will mainly follow the structure and recommendation of IEEE.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% please add name of component tested
+\section{Evaluation of checkpointer}
+
+%here enter brief introduction: name of component, description, WP responsible...
+
+%first, one test plan
+\input{wp21-cr-ts01-tp.tex}
+%depending on the test plan, the following documents may be used multiple times, please arrange in meaningful order
+
+%BSC's experimentation of checkpointer with SPECweb
+\newpage
+\input{wp21-cr-ts01-spec01-tds01.tex}
+\newpage
+\input{wp21-cr-ts01-spec01-tcs01.tex}
+\input{wp21-cr-ts01-spec01-tps01.tex}
+\input{wp21-cr-ts01-spec01-tl01.tex}
+\newpage
+\input{wp21-cr-ts01-spec01-tcs02.tex}
+\input{wp21-cr-ts01-spec01-tps02.tex}
+\input{wp21-cr-ts01-spec01-tl02.tex}
+\input{wp21-cr-ts01-spec01-tir02.tex}
+
+%SAP's experimentation of checkpointer with WebAS
+\newpage
+\input{wp21-cr-ts01-webas01-tds01.tex}
+\newpage
+\input{wp21-cr-ts01-webas01-tcs01.tex}
+\input{wp21-cr-ts01-webas01-tps01.tex}
+\input{wp21-cr-ts01-webas01-tl01.tex}
+\input{wp21-cr-ts01-webas01-tir01.tex}
+\newpage
+\input{wp21-cr-ts01-webas01-tcs02.tex}
+\input{wp21-cr-ts01-webas01-tps02.tex}
+\input{wp21-cr-ts01-webas01-tl02.tex}
+\input{wp21-cr-ts01-webas01-tir02.tex}
+
+%T6's experimentation of checkpointer with DBE
+\newpage
+\input{wp21-cr-ts01-dbe-tds01.tex}
+\newpage
+\input{wp21-cr-ts01-dbe-tcs01.tex}
+\input{wp21-cr-ts01-dbe-tps01.tex}
+\input{wp21-cr-ts01-dbe-tl01.tex}
+\newpage
+\input{wp21-cr-ts01-dbe-tcs02.tex}
+\input{wp21-cr-ts01-dbe-tps02.tex}
+\input{wp21-cr-ts01-dbe-tl02.tex}
+\input{wp21-cr-ts01-dbe-tir02.tex}
+
+
+%finally, one test summary report
+\newpage
+\input{wp21-cr-ts01-tsr.tex}
+
+\end{document}

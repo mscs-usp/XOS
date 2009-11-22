@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test log.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\starttl{wp21-cr-ts01-dbe-tl01}
+%Specify the unique identifier assigned to this test log.
+%\noindent\textbf{Test log identifier: wp21-cr-ts01-dbe-tl01}%insert file name here without extension '.tex'
+
+%Purpose:
+%To provide a chronological record of relevant details about the execution of tests.
+
+%Outline:
+%A test log shall have the following structure:
+%a) Test log identifier;
+%b) Description;
+%c) Activity and event entries.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test log or available to
+%users of the log.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Description}
+Tests where preformed by T6. No more hardware than a computer was needed
+
+\subsubsection{Activity and Event Entries}
+All tests were performed on the 8 November 2007 by T6.
+
+%(1) 
+\paragraph{Execution Description}
+see \refexpdoc{wp21-cr-ts01-dbe-tps01}
+
+%(2)
+\paragraph{Procedure Results}
+The test was executed successfully. The program was re\-started after a KILL signal, following the execution from the status saved in 
+the checkpoint file.
+
+This is the output of the application while checkpointing:
+writing 1
+writing 2
+writing 3
+writing 4 (we checkpoint here)
+writing 5
+writing 6 (we kill here)
+killed
+
+After restarting, we can see the output
+writing 5
+writing 6
+writing 7
+writing 8
+...
+
+Output files involved in the test contain the correct list of numbers form 1 to n.
+
+
+%(3)
+\paragraph{Environmental Information}
+%Record any environmental conditions specific to this entry (e.g., hardware substitutions).
+The test was executed in a laptop computer running Linux (kernel version 2.6.22-14) 
+
+%(4)
+\subsubsection{Anomalous Events}
+There were not anomalous events. The program restarted and the executed continued from the checkpointing.
+
+%(5)
+\subsubsection{Incident Report Identifiers}
+%Record the identifier of each test incident report, whenever one is generated.
+There were not incidents, the application could restart as expected from tho checkpointed status.

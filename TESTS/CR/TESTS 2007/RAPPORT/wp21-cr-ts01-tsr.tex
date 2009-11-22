@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test summary report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttsr{wp21-cr-ts01-tsr}{CR}
+
+
+%Specify the unique identifier assigned to this test summary report.
+
+%Purpose:
+%To summarize the results of the designated testing activities and to provide evaluations based on these
+%results.
+
+%Outline:
+%A test summary report shall have the following structure:
+%a) Test summary report identifier;
+%b) Summary;
+%c) Variances;
+%d) Comprehensive assessment;
+%e) Summary of results;
+%f) Evaluation;
+%g) Summary of activities;
+%h) Approvals. Bernd: we do not use this
+%The sections shall be ordered in the specified sequence. Additional sections may be included just prior to
+%Approvals. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%summary report or available to users of the summary report.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Summary}
+%Summarize the evaluation of the test items. Identify the items tested, indicating their version/revision level.
+%Indicate the environment in which the testing activities took place.
+%For each test item, supply references to the following documents if they exist: test plan, test design specifications,
+%test procedure specifications, test item transmittal reports, test logs, and test incident reports.
+Testing was performed using an early version of the kernel module modified for XtreemOS (blcr-0.6.pre0\_snapshot\_2007\_07\_12), the latest version of the original module (BLCR 0.6.1) and a XtreemOS patched version of the same.
+
+\begin{itemize}
+\item checkpointing and restart of native processes was evaluated in \refexpdoc{wp21-cr-ts01-webas01-tcs01},
+\item \refexpdoc{wp21-cr-ts01-spec01-tcs01} and \refexpdoc{wp21-cr-ts01-spec01-tcs02} tested the modules ability to checkpoint/restart Java applications using the original module and the one modified for XtreemOS respectively,
+\item the modules ability to checkpoint/restart a complex real-world application was tested using SAP WebAS in \refexpdoc{wp21-cr-ts01-webas01-tcs02}
+\item the modules ability to handle a multi-threaded Java application which relies on sockets was tested in \refexpdoc{wp21-cr-ts01-dbe-tcs02}
+\end{itemize}
+
+\subsubsection{Summary of Results}
+%Summarize the results of testing. Identify all resolved incidents and summarize their resolutions. Identify all
+%unresolved incidents.
+At this early stage of the development, it is no surprise to find that there were issues of robustness and problems trying to execute some of the tests. For this reason, complex scenarios were not envisioned at this stage of the evaluation process and only basic use case scenarios were attempted. Even still, problems were encountered with those; although it may not be fair to read too much into these early findings, since some of the required functionality will almost certainly need features from the other work packages to be fulfilled completely.
+
+\subsubsection{Evaluation}
+%Provide an overall evaluation of each test item including its limitations. This evaluation shall be based upon
+%the test results and the item level pass/fail criteria. An estimate of failure risk may be included.
+
+% Bernd: This evaluation should also state which WP4.2 requirements passed/failed. 
+As is to be expected, not all requirements are fulfilled in this early version:
+\begin{description}
+	\item{\ref{req:failure_detect}}: could not be tested yet,
+	\item{\ref{req:restart_mimic}}: not fulfilled, see \refexpdoc{wp21-cr-ts01-spec01-tcs01}, \refexpdoc{wp21-cr-ts01-webas01-tcs01}, and \refexpdoc{wp21-cr-ts01-webas01-tcs02}
+	\item{\ref{req:check_notify}}: could not be tested yet
+	\item{\ref{req:check_initiation}}: partially fulfilled
+	\item{\ref{req:check_performance}}: could not be tested yet
+	\item{\ref{req:check_kernel}}: fulfilled
+	\item{\ref{req:check_customize}}: could not be tested yet
+	\item{\ref{req:check_save}}: not fulfilled, problems with IPC reported in \refexpdoc{wp22-fm-ts01-galeb01-tir02}, problems with NSCD reported in \refexpdoc{wp21-cr-ts01-spec01-tl01} and problems using sockets reported in \refexpdoc{wp21-cr-ts01-dbe-tl02}. Furthermore, dynamic libraries are not supported during the startup of an application, see \refexpdoc{wp21-cr-ts01-webas01-tl02}.
+\end{description}
+
+The main issues encountered show that using the Linux term signal when checkpointing an application often will prevent the application from restarting correctly. This is because the term signal automatically cleans any temporary files that the process was using. The kill signal does not do any clean up and will allow the applications to restart correctly however, in the case of migration, any temporary files or environment settings will need to be accessible from the new node. When the distributed file system is incorporated with the checkpointing module it should be able to support this easily. Restoring sockets from a checkpoint has also been identified as a potential problem.
+

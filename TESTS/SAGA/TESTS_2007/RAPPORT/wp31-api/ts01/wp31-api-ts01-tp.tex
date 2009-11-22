@@ -1,0 +1,233 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test plan.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Test Plan}
+\starttp{wp31-api-ts01-tp}{Evaluation of the SAGA API}
+%Specify the unique identifier assigned to this test plan.
+%\noindent\textbf{Test plan identifier: wp31-api-ts01-tp}%insert file name here without extension '.tex'
+
+%Purpose:
+%To prescribe the scope, approach, resources, and schedule of the testing activities. To identify the items
+%being tested, the features to be tested, the testing tasks to be performed, the personnel responsible for each
+%task, and the risks associated with this plan.
+
+\subsubsection{Introduction}
+%Summarize the software items and software features to be tested. The need for each item and its history may
+%be included.
+%References to the following documents, when they exist, are required in the highest level test plan:
+%a) Project authorization;
+%b) Project plan;
+%c) Quality assurance plan;
+%d) Configuration management plan;
+%e) Relevant policies;
+%f) Relevant standards.
+%In multilevel test plans, each lower-level plan must reference the next higher-level plan.
+
+This test plan evaluates the completeness of the C++ implementation of
+SAGA API developed
+by WP3.1. The SAGA functionalities include:
+
+\begin{itemize}
+
+	\item Submission, monitoring, deletion of jobs.
+
+	\item Creation, deletion, copying and renaming of files.
+
+	\item Remote procedure Calls.
+
+	\item Stream management.
+
+	\item  Replica management
+\end{itemize}
+
+
+\subsubsection{Test Items}
+%Identify the test items including their version/revision level. Also specify characteristics of their transmittal
+%media that impact hardware requirements or indicate the need for logical or physical transformations before
+%testing can begin (e.g., programs must be transferred from tape to disk).
+%Supply references to the following test item documentation, if it exists:
+%a) Requirements specification;
+%b) Design specification;
+%c) Users guide;
+%d) Operations guide;
+%e) Installation guide.
+%Reference any incident reports relating to the test items.
+%Items that are to be specifically excluded from testing may be identified.
+
+We use with the 0.6 version of the SAGA-A C++
+implementation built on the 1.34  boost library. This version is 
+installed on a linux x86\_64 machine running debian etch distribution.
+ 
+\begin{itemize}
+ \item  Boost 1.34 C++ library was downloaded from the web site:\\
+ 	\mbox{\href{http://www.boost.org/}{http://www.boost.org/}}. 
+ \item SAGA-A 0.6 C++ implementation library was directly checked out 
+   from the SVN repository (revision 768):\\
+	\mbox{\href{https://svn.cct.lsu.edu/repos/saga/branches/sage-0.6/trunk }
+	{https://svn.cct.lsu.edu/repos/saga/branches/sage-0.6/trunk }}\\
+   The 10-day old SAGA-A 0.7 version released on November $12^{th}$ was also downloaded
+   but abandoned because the examples did not compile correctly and
+       revealed a mismatch of header files. The same problem occurred for
+       our test application. The SAGA development team recommended us to
+       take the previous release instead.
+\end{itemize}
+
+\subsubsection{Features to be Tested}
+%Identify all software features and combinations of software features to be tested. Identify the test design
+%specification associated with each feature and each combination of features.
+In this document, the following features will be tested:
+\begin{itemize}
+ \item Submission, monitoring, deletion of jobs.
+ \item Creation, deletion, copying and renaming of files.
+\end{itemize}
+
+
+The SAGA filesystem API entirely covers the POSIX API and makes it
+usable to several grid platforms. A user may then prefer to use
+the SAGA API instead of regular POSIX file API, in order to obtain a
+portable application over these environment
+
+
+Note that the C++ implementation of SAGA specification
+is still ongoing and the tested release (0.6) partially supports 
+it. 
+
+\subsubsection{Features not to be Tested}
+%Identify all features and significant combinations of features that will not be tested and the reasons.
+The following features are not tested as they are not supported by
+the 0.6 release:
+\begin{itemize}
+ \item Remote procedure Calls.
+ \item Stream management.
+ \item  Replica management
+\end{itemize}
+As mentioned in the SAGA specification, these features are part
+of the complete implementation of SAGA which should be available on XtreemOS.
+
+\subsubsection{Approach}
+
+%Describe the overall approach to testing. For each major group of features or feature combinations, specify
+%the approach that will ensure that these feature groups are adequately tested. Specify the major activities,
+%techniques, and tools that are used to test the designated groups of features.
+%The approach should be described in sufficient detail to permit identification of the major testing tasks and
+%estimation of the time required to do each one.
+%Specify the minimum degree of comprehensiveness desired. Identify the techniques that will be used to
+%judge the comprehensiveness of the testing effort (e.g., determining which statements have been executed at
+%least once). Specify any additional completion criteria (e.g., error frequency). The techniques to be used to
+%trace requirements should be specified.
+%Identify significant constraints on testing such as test item availability, testing resource availability, and
+%deadlines.
+The purpose of the early test is to provide feedback to developers
+about the implemented features and about the fulfillment of
+requirements.  
+
+Tests are performed by installing a version of SAGA that runs locally on
+one testbed machine. That way, we could test calls to the SAGA C++ API
+but all the spawned job were executing locally. 
+
+%For features not yet available while needed by EDF Applications, SAGA
+%specification is checked to be certain that final XtreemOS
+%implementation of SAGA will fulfill application requirements.
+
+
+
+\subsubsection{Item Pass Criteria}
+%Specify the criteria to be used to determine whether each test item has
+%passed or failed testing.
+
+SAGA will pass a test if:
+\begin{itemize}
+\item running application under the condition defined by the test design
+      specification does not crash the application.
+\item an application calling SAGA, under the condition of the test,
+      gives the same results as if jobs or files were managed directly
+      from a shell prompt.
+
+\end{itemize}
+
+%\subsubsection{Suspension Criteria and Resumption Requirements}
+%Specify the criteria used to suspend all or a portion of the testing activity on the test items associated with
+%this plan. Specify the testing activities that must be repeated, when testing is resumed.
+
+\subsubsection{Testing Tasks}
+%Identify the set of tasks necessary to prepare for and perform testing. Identify all intertask dependencies and
+%any special skills required.
+
+The testing tasks include:
+\begin{itemize}
+\item building and installing SAGA
+\item running simple programs that submit, monitor, and delete jobs
+      running the ZEPHYR application.
+\item running simple programs managing files (initialization of a dir
+      tree, creation, writing, reading, deletion and renaming of files).
+\end{itemize}
+
+The testing tasks does not yet include:
+
+\begin{itemize}
+ \item running and benchmarking SAGA asynchronous tasks support.
+ \item performing remote procedure calls.
+ \item sharing streams among SAGA processes
+ \item evaluating the Advert Service
+\end{itemize}
+
+As mentioned in the SAGA specification, these features are part
+of the complete implementation of SAGA which should be available on XtreemOS.
+These latter features are planned to be tested in succeeding WP4.2 deliverables.
+
+\subsubsection{Environmental Needs}
+%Specify both the necessary and desired properties of the test environment. This specification should contain
+%the physical characteristics of the facilities including the hardware, the communications and system software,
+%the mode of usage (e.g., stand-alone), and any other software or supplies needed to support the test.
+%Also specify the level of security that must be provided for the test facilities, system software, and proprietary
+%components such as software, data, and hardware.
+%Identify special test tools needed. Identify any other testing needs (e.g., publications or office space). Identify
+%the source for all needs that are not currently available to the test group.
+
+\label{api:env}
+
+SAGA and Boost have no special hardware requirements. They could be
+executed on a regular desktop two-processor PC with 2 GB RAM, and
+2 GHz CPU clock speed.  They are designed to be independent of any
+specific Linux distribution. On the testbed, we run Linux Kernel
+2.6.18-4-amd64 with SMP and 64 bit support. SAGA and Boost have been
+compiled and installed with the pre-installed third-party software and
+libraries :
+\begin{itemize}
+ \item gmake 3.81
+ \item gcc 4.1.2
+ \item autoconf 2.61
+ \item automake 1.9.6
+\end{itemize}
+
+
+
+\subsubsection{Responsibilities}
+%Identify the groups responsible for managing, designing, preparing, executing, witnessing, checking, and
+%resolving. In addition, identify the groups responsible for providing the test items identified in Section 'Test Items'  and the
+%environmental needs identified in Section 'Environmental needs'.
+%These groups may include the developers, testers, operations staff, user representatives, technical support
+%staff, data administration staff, and quality support staff.
+
+This test plan and the included tests are the
+responsibility of EDF.
+
+
+\subsubsection{Schedule}
+%Include test milestones identified in the software project schedule as well as all item transmittal events.
+%Define any additional test milestones needed. Estimate the time required to do each testing task. Specify the
+%schedule for each testing task and test milestone. For each testing resource (i.e., facilities, tools, and staff),
+%specify its periods of use.
+Tests have been performed from November $15^{th}$ to December
+$14^{th}$ 2007.
+
+\subsubsection{Risks and Contingencies}
+%Identify the high-risk assumptions of the test plan. Specify contingency plans for each (e.g., delayed delivery
+%of test items might require increased night shift scheduling to meet the delivery date).
+
+Delays in testing caused by unexpected installation and
+execution problems are envisaged.% as well as search for
+%features without knowing they have not been
+%implemented yet in the tested release. 

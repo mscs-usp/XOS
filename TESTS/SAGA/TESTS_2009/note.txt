@@ -1,0 +1,12 @@
+Time-stamp: <2009-07-03 00:34:58 bdaix>
+
+Note à propos des tests SAGA en Python
+--------------------------------------
+
+Après avoir installé libboost-dev (1.34.1-14 chez moi) et python-dev
+puis complié la bibliothèque SAGA de référence, positionner les edux
+variables suivantes :
+  - LD_LIBRARY_PATH doit pointer sur le répertoire dans lequel se
+    trouve la bibliothèque SAGA ;
+  - PYTHONPATH doit pointer sur le répertoire dans lequel se trouvent
+    les attaches Python pour la bibliothèque SAGA.

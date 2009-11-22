@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\starttps{wp21-cr-ts01-dbe-tps01}\\
+%Specify the unique identifier assigned to this test procedure specification.
+%\noindent\textbf{Test procedure specification identifier: wp21-cr-ts01-dbe-tps01}\\
+\noindent\textbf{Test log reference: \refexpdoc{wp21-cr-ts01-dbe-tl01}} \\%insert file name here without extension '.tex'
+\noindent\textbf{Test design specification reference: \refexpdoc{wp21-cr-ts01-dbe-tds01}} %Supply a reference (identifier) to the associated test design specification.
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+
+The purpose of the test is to see if the checkpointing and restart is able to handle simple Java applications
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+
+%\paragraph{Log}
+%Describe any special methods or formats for logging the results of test execution, the incidents observed, and
+%any other events pertinent to the test (see Clauses 9 and 10).
+
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+\begin{itemize}
+\item Download the latest BLCR module v0.6.1 from:\\
+	http://ftg.lbl.gov/CheckpointRestart/CheckpointDownloads.shtml
+\item Configure and make the module.
+\item Install the module
+\end{itemize}
+
+\paragraph{Start}
+
+\begin{itemize}
+\item Check that the BLCR modules are inserted properly. {\tt lsmod } will display blcr, blcr\_vmadump and blcr\_imports if they are there.
+\item Run {\tt make insmod} command from the installation directory if they are not there already (requires root).
+\item Start the Java application using {\tt cr\_run }. The entire command will look something like this:\\
+	{\tt cr\_run java -jar fileTest.jar file1.txt file2.txt}
+\end{itemize}
+
+
+\paragraph{Proceed}
+
+\begin{itemize}
+\item While the application is running determine its pid using {\tt ps }.
+\item Run the BLCR checkpoint command\\
+	{\tt cr\_checkpoint [options] PID} 
+\item Kill the application using SIGKILL instead of SIGTERM, that should say to the virtual machine that the application exited correctly.
+\item Restart the application from the checkpoint using the command\\
+	{\tt cr\_restart context.PID }.
+\item Observe that the application finishes correctly.
+\end{itemize}
+
+\paragraph{Measure}
+The test will succeed if after killing the application, it can restart from the checkpointed status. The applications is writing an 
+auto-incremented number each second. If we checkpoint at second 4, and kill the application at second 10, we expect that the application
+restart showing 5 in the screen an not starting from the beginning of continuing from 10.
+
+\paragraph{Shut Down}
+We will kill the application with the -9 parameter
+
+\paragraph{Restart}
+We will execute the restart procedure
+
+\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+The Java application never stops
+
+%\paragraph{Wrap Up}
+%Describe the actions necessary to restore the environment.
+
+\paragraph{Contingencies}
+%Describe the actions necessary to deal with anomalous events that may occur during execution.
+There where not contingencies.

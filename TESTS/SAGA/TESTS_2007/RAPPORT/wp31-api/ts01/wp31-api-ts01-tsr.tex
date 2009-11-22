@@ -1,0 +1,152 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test summary report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{Test Summary Report}
+\starttsr{wp31-api-ts01-tsr}{Evaluation of the SAGA API}
+%Specify the unique identifier assigned to this test summary report.
+%\noindent\textbf{Test summary report identifier: wp31-api-ts01-tsr}%insert file name here without extension '.tex'
+
+%Purpose:
+%To summarize the results of the designated testing activities and to provide evaluations based on these
+%results.
+
+Although the SAGA API component
+has not been released yet for XtreemOS, this first
+set of tests gives a first impression of the job and file management interfaces expected.
+
+% good idea of what will be the XtreemOS way to manage jobs and files.
+
+
+
+%Outline:
+%A test summary report shall have the following structure:
+%a) Test summary report identifier;
+%b) Summary;
+%c) Variances;
+%d) Comprehensive assessment;
+%e) Summary of results;
+%f) Evaluation;
+%g) Summary of activities;
+%h) Approvals. Bernd: we do not use this
+%The sections shall be ordered in the specified sequence. Additional sections may be included just prior to
+%Approvals. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%summary report or available to users of the summary report.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Summary}
+%Summarize the evaluation of the test items. Identify the items tested, indicating their version/revision level.
+%Indicate the environment in which the testing activities took place.
+%For each test item, supply references to the following documents if they exist: test plan, test design specifications,
+%test procedure specifications, test item transmittal reports, test logs, and test incident reports.
+
+The 0.6  release of the SAGA-A C++ API
+has been evaluated 
+\begin{itemize}
+ \item with a test application 
+     managing jobs running the  EDF application Zephyr.
+ \item with a simple program managing 
+files. It is expected that the EDF applications ZEPHYR, MODERATO or SIMEON can be suitably adapted to the SAGA file management interface in order to address files on
+XtreemOS.
+\end{itemize}
+
+%As well the document ``A simple API for Grid Application, T. Goodale et
+%all., GWD-R.90 SAGA-CORE-WG'' have been carefully read in its 1.0 RC.6 version.
+
+
+%\subsubsection{Variances}
+%Report any variances of the test items from their design specifications. Indicate any variances from the test
+%plan, test designs, or test procedures. Specify the reason for each variance.
+
+At this time, the tests could only cover job and file management and just
+have an informative value because the SAGA for XtreemOS has not been released 
+yet. However, the installation of SAGA and the execution of the test programs
+have allowed us to gain first insights into the concepts.
+
+During the installation of SAGA and Boost using autotools, some
+minor operations have to be done manually (see \refexpdoc{wp31-api-ts01-zephyr01-tps01}):
+\begin{itemize}
+ \item renaming of a boost shared library
+ \item copy of saga library in the
+       library path not mentioned in documentation
+\end{itemize} 
+
+The need for these manual operations is not well-identified
+yet and may be due to the environment of the test machine.
+This issue will be further investigated when testing the next
+release of SAGA.
+
+
+A problem was also forwarded to the SAGA team concerning a wrong status
+reported for an ended job. This referred to an already identified
+bug in SAGA.
+
+
+\subsubsection{Comprehensiveness Assessment}
+%Evaluate the comprehensiveness of the testing process against the comprehensiveness criteria specified in
+%the test plan (section 'Approach' in test plan document) if the plan exists. Identify features or feature combinations that were not sufficiently
+%tested and explain the reasons.
+
+The testing process was in line with the approach given in \refexpdoc{wp31-api-ts01-tp}.
+
+
+%\subsubsection{Summary of Results}
+%%Summarize the results of testing. Identify all resolved incidents and summarize their resolutions. Identify all
+%%unresolved incidents.
+
+%After this first partial evaluation of SAGA C++ API (release 0.6), one arrives at the following conclusions:
+%\begin{itemize}
+%\item first tests of the SAGA API on a Linux system do not allow to give a final assessment of the fulfillment of requirements  \ref{req:other_apis_as_basis},
+%      \ref{req:posix}. However, the first impression is that the SAGA development is prepared for the integration with XtreemOS services.  
+% \item The first contact with the C++ API was satisfying. C and Java
+%       wrapping are expected to fulfill requirement \ref{req:api_language}.
+%\end{itemiz
+
+
+\subsubsection{Evaluation}
+%Provide an overall evaluation of each test item including its limitations. This evaluation shall be based upon
+%the test results and the item level pass/fail criteria. An estimate of failure risk may be included.
+
+% Bernd: This evaluation should also state which WP4.2 requirements passed/failed. 
+
+
+Below we present a list of XtreemOS-related requirements and their fulfillment status. 
+We also list requirements that are not implemented yet, and therefore had not been tested.
+% However, these requirements must be fulfilled in future versions of XtreemFS.
+
+\begin{itemize}
+\item \ref{req:other_apis_as_basis} not fulfilled, since not
+      implemented yet, but SAGA also supports GridFTP. Note that GAT support
+      is currently  implemented in the 0.7 version of SAGA and that
+      the job management SAGA API reflects the DRMAA API very closely.
+\item \ref{req:posix} not fulfilled, since not
+      implemented yet. Still the SAGA specification makes several
+      references to POSIX. The full POSIX compliance still needs to be evaluated.
+\item \ref{req:api_language} not fulfilled, since not
+      implemented yet, but a C++ API is already available for the execution on a single Linux machine.
+\item \ref{req:degree_of_interoperability} not fulfilled, since not
+      implemented yet.
+% \item \ref{req:meta_access_gran} not tested, since access right management is not fully implemented by XtreemFS
+% \item \ref{req:monitoring} not tested, since not implemented
+% \item \ref{req:data_access_time} ???
+% \item \ref{req:replica_limitation} not tested, since not implemented
+% \item \ref{req:data_versioning} not tested, since not implemented
+% \item \ref{req:data_transmission_monitoring} not tested, since not implemented
+% \item \ref{req:GOM} partly fulfilled, only the basic functionality could be tested, transactions are scheduled for later testing (wp34-xfs-ts01-wiss01-tds02)
+% \item \ref{req:posix} partly fulfilled
+% \item \ref{req:data_and_comput_intensive} not fulfilled, scalability and performance of XtreemFS data management were rather poor
+% \item \ref{req:terabyte_storage} not tested, because of lack of hardware resources
+% \item \ref{req:sec_acl} not fulfilled and not fully tested, since ACLs are not yet supported in XtreemFS
+\end{itemize}
+
+
+In the next release of this document, more extended tests will be
+performed hopefully on the integrated version of XtreemOS.
+
+%\subsubsection{Summary of Activities}
+%Summarize the major testing activities and events. Summarize resource consumption data, e.g., total staffing
+%level, total machine time, and total elapsed time used for each of the major testing activities.

@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test case specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\starttcs{wp21-cr-ts01-spec01-tcs02}{XOS CR and simple Java app}
+
+%Purpose:
+%To define a test case identified by a test design specification.
+
+%Outline:
+%A test case specification shall have the following structure:
+%a) Test case specification identifier;
+%b) Test items;
+%c) Input specifications;
+%d) Output specifications;
+%e) Environmental needs;
+%f) Special procedural requirements;
+%g) Intercase dependencies.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test case specification
+%or available to users of the case specification.
+%Since a test case may be referenced by several test design specifications used by different groups over a long
+%time period, enough specific information must be included in the test case specification to permit reuse.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Test Items}
+%Identify and brie��y describe the items and features to be exercised by this test case.
+%For each item, consider supplying references to the following test item documentation:
+%a) Requirements specification;
+%b) Design specification;
+%c) Users guide;
+%d) Operations guide;
+%e) Installation guide.
+We will test the BLCR checkpointer module with the added XtreemOS functionality on a simple multi-threaded Java application in this case.
+
+\subsubsection{Input Specifications}
+%Specify each input required to execute the test case. Some of the inputs will be specified by value (with
+%tolerances where appropriate), while others, such as constant tables or transaction files, will be specified by
+%name. Identify all appropriate databases, files, terminal messages, memory resident areas, and values passed
+%by the operating system.
+%Specify all required relationships between inputs (e.g., timing).
+The input will be the running Java application.
+
+\subsubsection{Output Specifications}
+%Specify all of the outputs and features (e.g., response time) required of the test items. Provide the exact value
+%(with tolerances where appropriate) for each required output or feature.
+The output will be simple text, detailing the length of time needed for the application to finish, that the Java application outputs to screen upon completion.
+
+\subsubsection{Environmental Needs}
+
+\paragraph{Hardware}
+%Specify the characteristics and configurations of the hardware required to execute this test case (e.g.,
+%132 character 24 line CRT).
+A single x86 machine is required.
+
+\paragraph{Software}
+%Specify the system and application software required to execute this test case. This may include system software
+%such as operating systems, compilers, simulators, and test tools. In addition, the test item may interact
+%with application software.
+The following software was used:
+\begin{itemize}
+\item Linux kernel 2.6.15 or higher
+\item JRE 1.4.2 or above
+\item BLCR 0.6.1 
+\item patch for BLCR module with XtreemOS extensions
+\item simple multi-threaded Java application that runs for a pre-determined time
+\end{itemize}

@@ -1,0 +1,63 @@
+under construction!!!
+
+does not compile yet!!!
+
+to do : precise software environment in a single point in the text
+
+
+SAGA Stream : OK to use from Zephyr core to the  plot window
+
+
+
+
+R19 XtreemOS needs to provide access to various Grid services
+partially fulfilled : SAGA provides API that allows to call the
+serrvice of xtreemos built underneath to submit 
+
+
+A.5 XtreemOS Interfaces
+R47: Other API Standards as basis for XtreemOS API
+XtreemOS API must consider the following standard as a basis: SAGA (especially
+the subsets DRMAA, GAT). Furthermore, any other standard allowing applications
+to access user and/or job information is welcome. WP3.1 must ensure that applications
+can adapt to XtreemOS in a way that complex start and stop procedures
+can be specified that are used to start/stop the various parts of the overall application.
+To this end, WP3.1 must ensure that the interfaces are sufficient enough and
+compatible with WP3.3
+Additionally, one application requires the following functionalities that are actually
+provided by Globus/Globus-related components: GridFTP, Apache Axis,
+and the GSI public key infrastructure. Here, an equivalent XtreemOS functionality
+is needed.
+Previous number (D4.2.3): R45
+Updated: no
+Importance: obligatory
+Implementation order: 5
+R48: Demand for POSIX compliance
+XtreemOS must provide access to the distributed resources in the Grid from any
+node using the standard Posix interface. Mandatory access control (ACL) as defined
+e.g. in POSIX .1e, IEEE 1003.1e/2c (which was withdrawn). It is yet to be
+clarified which calls have to be provided. Furthermore, it would prove useful if
+functions for management of processes on remote machines would be part of the
+XtreemOS API.
+Previous number (D4.2.3): R46
+Updated: no
+Importance: obligatory
+Implementation order: 5.3
+R49: XtreemOS API language support
+XtreemOS must support several different programming languages. The mandatory
+languages and their priorities are C (high priority), C++ (high priority), Java (high
+priority) and Fortran 77 (low priority). Fortran 77 can be supported via C bindings.
+The optional languages are Python (medium priority), Perl (medium priority) and
+Ada (low priority).
+Previous number (D4.2.3): R47
+Updated: no
+Importance: obligatory
+Importance for MDs: In MDs, only Java is obligatory. The rest are optional.
+
+Implementation order: 3.3
+R50: Degree of Interoperability
+It should be possible to use XtreemOS as a backend for GT4 WS-GRAM.
+Previous number (D4.2.3): R48
+Updated: no
+Importance: optional
+Implementation order: 6.4

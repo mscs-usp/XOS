@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test incident report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttir{wp21-cr-ts01-webas01-tir02}{WEBAS does not start with CR}
+
+
+%Specify the unique identifier assigned to this test incident report.
+%\noindent\textbf{Test incident report identifier:}%insert file name here without extension '.tex'
+
+
+%Purpose:
+%To document any event that occurs during the testing process that requires investigation.
+
+%Outline:
+%A test incident report shall have the following structure:
+%a) Test incident report identifier;
+%b) Summary;
+%c) Incident description;
+%d) Impact.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test incident report or
+%available to users of the incident report.
+%Details on the content of each section are contained in the following subclauses.
+
+
+
+\subsubsection{Summary}
+%Summarize the incident. Identify the test items involved indicating their version/revision level. References to
+%the appropriate test procedure specification, test case specification, and test log should be supplied.
+The SAP WebAS cannot be started normally using the checkpointing and restarting procedure. Thus, the checkpointing and restarting mechanism could not be evaluated. 
+
+\subsubsection{Incident Description}
+%Provide a description of the incident. This description should include the following items:
+%a) Inputs;
+%b) Expected results;
+%c) Actual results;
+%d) Anomalies;
+%e) Date and time;
+%f) Procedure step;
+%g) Environment;
+%h) Attempts to repeat;
+%i) Testers;
+%j) Observers.
+%Related activities and observations that may help to isolate and correct the cause of the incident should be
+%included (e.g., describe any test case executions that might have a bearing on this particular incident and any
+%variations from the published test procedure).
+
+The SAP WebAS could not be started using the provided command from the checkpointing and restarting mechanism. The corresponding output provides the information that some dynamic libraries could not be handled properly. Thus, the testing of the checkpointing and restarting mechanism itself was not performed.
+
+\subsubsection{Impact}
+%If known, indicate what impact this incident will have on test plans, test design specifications, test procedure
+%specifications, or test case specifications.
+The SAP WebAS could not be started correctly. This leads to the fact that the SAP WebAS cannot be used at all in combination with the currently provided checkpointing and restarting functionality.

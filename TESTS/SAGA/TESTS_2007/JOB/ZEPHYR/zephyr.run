@@ -1,0 +1,5 @@
+cd /home/kortas/XTREEMOS/TESTS/SAGA/JOB/ZEPHYR/
+
+/logiciels/mpiib/bin/mpirun -v -machinefile machine.list -np 1 ./zephyr < INPUT  > OUTPUT.saga
+
+

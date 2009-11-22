@@ -1,0 +1,11 @@
+NOT RUN! Job state is: New      
+JobID: [fork://clau5aja]-[5071]
+Just RUN! Job state is: Running  
+SUSPENDED! Job state is: Suspended
+RESUMED! Job state is: Running  
+NOT DONE! Job state is: Running  
+AWAITED! Job state is: Running  
+should be DONE by now! Job state is: Done     
+JobID: [fork://clau5aja]-[5074]
+Just RUN! Job state is: Running  
+CANCELED! Job state is: Running  

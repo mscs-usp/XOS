@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test design specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\subsection{Test Design Specification: Available features of SAGA API on
+%  a regular Linux Box}
+\starttds{wp31-api-ts01-zephyr01-tds01}
+%Specify the unique identifier assigned to this test design specification. 
+%\noindent\textbf{Test design specification identifier: wp31-api-ts01-zephyr01-tds01}%insert file name here without extension '.tex'
+
+%\noindent\textbf{Test plan reference: wp31-api-ts01-tp} %Supply a reference (identifier) to the associated test plan.
+
+%Purpose
+%To specify refinements of the test approach and to identify the features to be tested by this design and its
+%associated tests.
+
+
+
+%Outline:
+%A test design specification shall have the following structure:
+%a) Test design specification identifier;
+%b) Features to be tested;
+%c) Approach refinements;
+%d) Test identification;
+%e) Feature pass/fail criteria.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test design specification
+%or available to users of the design specification.
+%Details on the content of each section are contained in the following subclauses.
+
+\subsubsection{Features to be Tested}
+%Identify the test items and describe the features and combinations of features that are the object of this
+%design specification. Other features may be exercised, but need not be identified.
+%For each feature or feature combination, a reference to its associated requirements in the item requirement
+%specification or design description should be included.
+
+In this release, we test some of the available features of the SAGA C++
+API running on a regular Linux system. In particular, the support of
+\begin{itemize}
+ \item Job Management : spawn, monitor, cancel or terminate a job
+ \item File management : create, copy, rename, delete files in different
+       directories.
+\end{itemize}
+
+\subsubsection{Approach Refinements}
+%Specify refinements to the approach described in the test plan. Include specific test techniques to be used.
+%The method of analyzing test results should be identified (e.g., comparator programs or visual inspection).
+%Specify the results of any analysis that provides a rationale for test case selection. For example, one might
+%specify conditions that permit a determination of error tolerance (e.g., those conditions that distinguish valid
+%inputs from invalid inputs).
+%Summarize the common attributes of any test cases. This may include input constraints that must be true for
+%every input in the set of associated test cases, any shared environmental needs, any shared special procedural
+%requirements, and any shared case dependencies.
+
+After compiling and installing SAGA (first test case), we test the
+SAGA implementation and API in two ways: 
+\begin{itemize}
+ \item a test application that runs, monitors, and cancels a ZEPHYR application.
+ \item a test program that performs file operations (creation of a directory
+       tree, creation, copy, renaming or deletion of files)
+\end{itemize}
+
+\subsubsection{Test Identification}
+%List the identifier and a brief description of each test case associated with this design. A particular test case
+%may be identified in more than one test design specification. List the identifier and a brief description of each
+%procedure associated with this test design specification.
+
+Two test cases relate to this design specification :
+\begin{itemize}
+ \item {\refexpdoc{wp31-api-ts01-zephyr01-tcs01}} dealing with the
+       installation of SAGA and focusing on job management issues.
+ \item {\refexpdoc{wp31-api-ts01-zephyr01-tcs01}} dealing with files
+       handling operations.
+\end{itemize}
+
+\subsubsection{Feature Pass/Fail Criteria}
+%Specify the criteria to be used to determine whether the feature or feature combination has passed or failed.
+
+Tests are considered as passed when the test program behavior and output
+correspond to the SAGA specification.

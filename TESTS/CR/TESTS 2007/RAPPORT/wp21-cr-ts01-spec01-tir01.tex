@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test incident report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\starttir{wp21-cr-ts01-spec01-tir01}{Failures while restarting checkpoints}
+%Specify the unique identifier assigned to this test incident report.
+%insert file name here without extension '.tex'
+
+
+%Purpose:
+%To document any event that occurs during the testing process that requires investigation.
+
+%Outline:
+%A test incident report shall have the following structure:
+%a) Test incident report identifier;
+%b) Summary;
+%c) Incident description;
+%d) Impact.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test incident report or
+%available to users of the incident report.
+%Details on the content of each section are contained in the following subclauses.
+
+
+
+\subsubsection{Summary}
+%Summarize the incident. Identify the test items involved indicating their version/revision level. References to
+%the appropriate test procedure specification, test case specification, and test log should be supplied.
+There were two different types of failures when trying to restart the checkpoints.
+
+\subsubsection{Incident Description}
+%Provide a description of the incident. This description should include the following items:
+%a) Inputs;
+%b) Expected results;
+%c) Actual results;
+%d) Anomalies;
+%e) Date and time;
+%f) Procedure step;
+%g) Environment;
+%h) Attempts to repeat;
+%i) Testers;
+%j) Observers.
+%Related activities and observations that may help to isolate and correct the cause of the incident should be
+%included (e.g., describe any test case executions that might have a bearing on this particular incident and any
+%variations from the published test procedure).
+The first failure encountered happened after obtaining a checkpoint using the term command. The error message when attempting to restart that checkpoint says that there is no such file or directory, even though the checkpoint appears to have been created successfully. Further investigation using dmesg shows the following errors:
+\begin{lstlisting}
+vmadump: open('/tmp/hsperfdata\_khogan/15956', 0x2) failed: -2
+vmadump: mmap failed: /tmp/hsperfdata\_khogan/15956
+\end{lstlisting}
+The /tmp files referred to by vmadump were not present on the system, so it appears that the term signal caused these to be removed when the system was being shutdown.
+
+
+The next failure happened after obtaining a checkpoint using the kill command. The error message says that permission is denied, even though the checkpoint has the correct permissions for the current user. dmesg shows the following errors:
+\begin{lstlisting}
+vmadump: open('/var/run/nscd/passwd', 0x0) failed: -13
+vmadump: mmap failed: /var/run/nscd/passwd
+\end{lstlisting}
+NCSD referred to by dmesg is the name caching daemon installed on the test machine and appears to be causing a conflict. It has been confirmed that the conflict was due to NCSD by disabling the service and retrying the test, which completed successfully.
+
+
+
+\subsubsection{Impact}
+%If known, indicate what impact this incident will have on test plans, test design specifications, test procedure
+%specifications, or test case specifications.
+The term signal is used by Linux to signal a shutdown to an application. It allows for a graceful shutdown by the application and removes temporary files which unfortunately will prevent many applications from being restarted. Therefore, this signal should not be used in the context of a checkpoint/restart operation.
+
+The kill signal works, but we have identified that there is an issue with name caching. This needs to be addressed in some way, either name caching functionality will have to be removed on the system or an other workaround will have to be sought.
+
+

@@ -1,0 +1,149 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test log.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Test log: Job Management}
+\starttl{wp31-api-ts01-zephyr01-tl01}
+%Specify the unique identifier assigned to this test log.
+%\noindent\textbf{Test log identifier: wp31-api-ts01-zephyr01-tl01}%insert file name here without extension '.tex'
+
+
+
+%Purpose:
+%To provide a chronological record of relevant details about the execution of tests.
+
+%Outline:
+%A test log shall have the following structure:
+%a) Test log identifier;
+%b) Description;
+%c) Activity and event entries.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test log or available to
+%users of the log.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Description}
+%Information that applies to all entries in the log except as specifically noted in a log entry should be included
+%here. The following information should be considered:
+%a) Identify the items being tested including their version/revision levels. For each of these items, supply
+%a reference to its transmittal report, if it exists.
+%b) Identify the attributes of the environments in which the testing is conducted. Include facility identifi-
+%cation, hardware being used (e.g., amount of memory being used, CPU model number, and number
+%and model of tape drives, and/or mass storage devices), system software used, and resources available
+%(e.g., the amount of memory available).
+
+The tests have been done in the hardware and software environment
+described in \refexpdoc{api:env} 
+
+
+
+
+\subsubsection{Activity and Event Entries}
+%For each event, including the beginning and end of activities, record the occurrence date and time along with
+%the identity of the author.
+%The information in (1) through (5) should be considered:
+
+%(1) 
+\paragraph{Execution Description}
+%Record the identifier of the test procedure being executed and supply a reference to its specification. Record
+%all personnel present during the execution including testers, operators, and observers. Also indicate the function
+%of each individual.
+
+The tests described here have been conducted by Samuel Kortas (EDF). The
+execution procedure is described in specification
+\refexpdoc{wp31-api-ts01-zephyr01-tds01}.
+
+%(2)
+\paragraph{Procedure Results}
+%For each execution, record the visually observable results (e.g., error messages generated, aborts, and
+%requests for operator action). Also record the location of any output (e.g., reel number). Record the successful
+%or unsuccessful execution of the test.
+
+
+Installation and set up of the boost and saga libraries did 
+not reveal any other contingencies than the ones presented
+in \refexpdoc{api:contingencies}. Summary: The installation has been completed successfully.
+
+
+\subsubsection{Execution of the test program}
+
+Calling the test program several times, it produced the following output :
+
+\begin{lstlisting}
+ NOT RUN! Job state is: New      
+ JobID: [any://localhost]-[rendvous-fn1:9205]
+ Just RUN! Job state is: Running  
+ SUSPENDED! Job state is: Suspended
+ RESUMED! Job state is: Running  
+ NOT DONE! Job state is: Running  
+ AWAITED! Job state is: Running  
+ should be DONE by now! Job state is: Running  
+ JobID: [any://localhost]-[rendvous-fn1:9385]
+ Just RUN! Job state is: Running  
+ CANCELED! Job state is: Canceled 
+\end{lstlisting}
+
+or this one alternatively
+
+\begin{lstlisting}
+ NOT RUN! Job state is: New      
+ JobID: [any://localhost]-[rendvous-fn1:26007]
+ Just RUN! Job state is: Running  
+ SUSPENDED! Job state is: Suspended
+ RESUMED! Job state is: Running  
+ NOT DONE! Job state is: Running  
+ terminate called after throwing an instance of 'boost::process::system_error'
+  what():  boost::process::child::wait: waitpid(2) failed: No child processes
+ Abandon
+\end{lstlisting}
+
+
+We checked that the job submitted was actually running on the 
+machine by browsing the results produced by Zephyr stored
+into a ``fort.66'' produced in the same directory as the
+test program.
+
+
+%(3)
+%\paragraph{Environmental Information}
+%Record any environmental conditions specific to this entry (e.g., hardware substitutions).
+
+%(4)
+\subsubsection{Anomalous Events}
+%Record what happened before and after an unexpected event occurred (e.g., A summary display was
+%requested and the correct screen displayed, but response seemed unusually long. A repetition produced the
+%same prolonged response). Record circumstances surrounding the inability to begin execution of a test
+%procedure or failure to complete a test procedure (e.g., a power failure or system software problem).
+
+\begin{itemize}
+ \item The ``exception error'' encountered in the alternative result
+       obtained could be explained by the termination of the executed job
+       before probing its status. The job disappeared, its
+       status is therefore not readable any more and throwing the
+       exception. \\
+       {\bf Still this behavior does not agree with the Saga specification}
+       stating that the status of the terminated job should have been
+       ``Done''.
+ \item In the ``regular'' output, the job status also remains
+       ``running'' after a call to the wait() method. In fact
+       in agreement with the Saga specification, we understand that
+       the status should either be ``canceled'', ``done'' or ``failed''.
+\end{itemize}
+
+
+
+
+
+%(5)
+%\subsubsection{Incident Report Identifiers}
+%Record the identifier of each test incident report, whenever one is generated.
+ Summary: Questions on these two points have been forwarded to the WP
+3.1 team. But, for the moment we consider {\bf the test as
+failed}. Still, though the tests could not be run through the XtreemOS
+execution environment (SAGA API has not been ported on XtreemOS yet),
+one could easily prepare, start, monitor, end or cancel a job, which
+is very encouraging.  
+

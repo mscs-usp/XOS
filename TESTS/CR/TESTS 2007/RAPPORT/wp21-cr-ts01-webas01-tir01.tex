@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test incident report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttir{wp21-cr-ts01-webas01-tir01}{Text editor does not restart}
+
+
+%Specify the unique identifier assigned to this test incident report.
+%\noindent\textbf{Test incident report identifier: %insert file name here without extension '.tex'
+
+
+%Purpose:
+%To document any event that occurs during the testing process that requires investigation.
+
+%Outline:
+%A test incident report shall have the following structure:
+%a) Test incident report identifier;
+%b) Summary;
+%c) Incident description;
+%d) Impact.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test incident report or
+%available to users of the incident report.
+%Details on the content of each section are contained in the following subclauses.
+
+
+
+\subsubsection{Summary}
+%Summarize the incident. Identify the test items involved indicating their version/revision level. References to
+%the appropriate test procedure specification, test case specification, and test log should be supplied.
+The simple text editor \emph{gedit} could not be restarted from the checkpoint. 
+
+\subsubsection{Incident Description}
+%Provide a description of the incident. This description should include the following items:
+%a) Inputs;
+%b) Expected results;
+%c) Actual results;
+%d) Anomalies;
+%e) Date and time;
+%f) Procedure step;
+%g) Environment;
+%h) Attempts to repeat;
+%i) Testers;
+%j) Observers.
+%Related activities and observations that may help to isolate and correct the cause of the incident should be
+%included (e.g., describe any test case executions that might have a bearing on this particular incident and any
+%variations from the published test procedure).
+
+After a checkpointing of the text editor \emph{gedit}, the editor could not be restarted correctly. The output on the command line gives the impression that the checkpointing itself was successful. However, the failed restart might result from a checkpoint that was not generated correctly. Thus, it is the task of the development groups to find the real reason.
+
+\subsubsection{Impact}
+%If known, indicate what impact this incident will have on test plans, test design specifications, test procedure
+%specifications, or test case specifications.
+The text editor could not be restarted from the checkpoint. Thus, the application could not be used at all after the checkpointing.

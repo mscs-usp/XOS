@@ -1,0 +1,2 @@
+qsub -l nodes=1:ppn=1 job_PBS
+

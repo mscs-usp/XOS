@@ -1,0 +1,31 @@
+SAGA_LOCATION=/home/kortas/SOFTS/BUILD/saga-c++-0.7-src/
+BOOST_LOCATION=/home/kortas/SOFTS/boost_34_1
+SAGA_ROOT=/home/kortas/SOFTS/saga
+
+SRC      = $(wildcard *.cpp)                                         
+OBJ      = $(SRC:%.cpp=%.o)                                          
+BIN      = $(SRC:%.cpp=%)                                            
+
+CXX      = gcc                                                       
+#CXXFLAGS = -c -O3 -pthreads -I/opt/mpi/include                       
+#CXXFLAGS = -c -I$(SAGA_ROOT)/include/ -I$(SAGA_ROOT)/include/saga/
+CXXFLAGS = -c -I$(SAGA_LOCATION)/src
+
+LD       = $(CXX)                                                    
+#LDFLAGS  = -L/opt/mpi/lib/ -lmpi                                     
+LDFLAGS = -L $(BOOST_LOCATION)/lib/ -lboost_serialization-gcc41-1_34_1.so.1.34.1
+LDFLAGS = /home/kortas/SOFTS/boost_34_1/lib/libboost_serialization-gcc41-1_34_1.so.1.34.1 \
+	/home/kortas/SOFTS/saga/lib/libsaga_package_namespace.so
+
+include $(SAGA_LOCATION)/make/saga.engine.i.mk                         
+include $(SAGA_LOCATION)/make/saga.package.file.i.mk                   
+
+.default: $(BIN)                                                     
+
+$(BIN): % : %.cpp                                                    
+
+$(OBJ): %.o : %.cpp                                                  
+	$(CXX) $(CXXFLAGS) $(SAGA_CXXFLAGS) -o $@ $<                   
+
+$(BIN): % : %.o                                                      
+	$(LD)  $(LDFLAGS)  $(SAGA_LDFLAGS)  -o $@ $<                       

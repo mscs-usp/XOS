@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\starttps{wp21-cr-ts01-dbe-tps02}{Checkpointing multi-threaded Java application with sockets}\\
+%Specify the unique identifier assigned to this test procedure specification.
+%\noindent\textbf{Test procedure specification identifier: wp21-cr-ts01-dbe-tps02}\\ %insert file name here without extension '.tex'
+\noindent\textbf{Test log reference: \refexpdoc{wp21-cr-ts01-dbe-tl02}}\\ %insert file name here without extension '.tex'
+\noindent\textbf{Test design specification reference: \refexpdoc{wp21-cr-ts01-dbe-tds01}} %Supply a reference (identifier) to the associated test design specification.
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+
+The purpose of this is to see how the checkpointer module will handle a multi-threaded Java application with server and client sockets open.
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+We start the application in the standard way and, after few seconds we checkpoint it. We wait some more seconds and we kill it. After a sort period
+of time, enough to allow the kernel to remove references to sockets that have been closed or destroyed, we try to restart the application
+from the checkpointed status.
+
+\paragraph{Log}
+%Describe any special methods or formats for logging the results of test execution, the incidents observed, and
+%any other events pertinent to the test (see Clauses 9 and 10).
+The multithreaded application starts and most of the threads continue running from the checkpointing status. Some of them fail (controlled exceptions)
+because they cannot read/write in their assigned sockets.
+
+The application could restart fine if, after this error, the server socket is open again. Unfortunately, this kind of error in a server is
+not expected, and the exception is simply reported, and the socket is not re\-opened of re\-binded again.
+
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+\begin{itemize}
+\item Download the latest BLCR module v0.6.1 from:\\
+	http://ftg.lbl.gov/CheckpointRestart/CheckpointDownloads.shtml
+\item Configure and make the module.
+\item Install the module
+\end{itemize}
+
+
+\paragraph{Start}
+%Describe the actions necessary to begin execution of the procedure.
+\begin{itemize}
+\item Check that the BLCR modules are inserted properly. {\tt lsmod } will display blcr, blcr\_vmadump and blcr\_imports if they are there.
+\item Run {\tt make insmod} command from the installation directory if they are not there already (requires root).
+\item Start the Java application using {\tt cr\_run }. The entire command will look something like this:\\
+	{\tt cr\_run bin/run.sh}
+\end{itemize}
+
+\paragraph{Proceed}
+%Describe any actions necessary during execution of the procedure.
+\begin{itemize}
+\item While the application is running determine its pid using {\tt ps }.
+\item Run the BLCR checkpoint command\\
+	{\tt cr\_checkpoint [options] PID}\\
+	where OPTIONS could be a Linux signal such as the term or kill signal, and the PID used is the one previously determined.
+\item Check that the checkpoint file was created in the current directory. It will have be called 'context.PID'.
+\item Restart the application from the checkpoint using the command\\
+	{\tt cr\_restart context.PID }.
+\item Observe that the application finishes correctly.
+\end{itemize}
+
+\paragraph{Measure}
+%Describe how the test measurements will be made (e.g., describe how remote terminal response time is to be
+%measured using a network simulator).
+
+\paragraph{Shut Down}
+%Describe the actions necessary to suspend testing, when unscheduled events dictate.
+The severity of the error messages will dictate whether the test needs to be suspended.
+
+\paragraph{Restart}
+%Identify any procedural restart points and describe the actions necessary to restart the procedure at each of
+%these points.
+We restart the application from the checkpointed status using the standard process, without a preparation task.
+
+\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+The Java application will stop manually by pressing CTRL and C form the shell.
+
+\paragraph{Wrap Up}
+%Describe the actions necessary to restore the environment.
+We can never reproduce the same environment as when the application was running, because it contains references to kernel identifiers that
+have been deleted by the kernel. Those identifiers now means nothing for the kernel and no resource is associated to them. Read and write
+operations will fail.
+
+\paragraph{Contingencies}
+%Describe the actions necessary to deal with anomalous events that may occur during execution.
+Knowing this issue we can write applications that deal with it and allow the Java application to recover from such failures after a
+checkpointing. As explained before, one of these actions can be to re\-open and re\-bind server sockets when an IOException is thrown.
+Client sockets (threads talking with another server) need not be re-open, because it is probably that the remote server.

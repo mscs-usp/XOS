@@ -1,0 +1,118 @@
+/tmp/SAGA:
+total 4
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1k
+
+/tmp/SAGA/sup1k:
+total 4
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 4
+drwxr-xr-x 2 bdaix bdaix 4096 jun 30 10:13 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 0
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 bdaix bdaix 1024 jun 30 10:13 es.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 bdaix bdaix 1024 jun 30 10:13 es1k.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 1008
+-rw-r--r-- 1 bdaix bdaix 1024000 jun 30 10:13 es1M.txt
+drwxr-xr-x 2 bdaix bdaix    4096 jun 30 10:13 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 105116
+-rw-r--r-- 1 bdaix bdaix 102400000 jun 30 10:13 es100M.txt
+-rw-r--r-- 1 bdaix bdaix   5120000 jun 30 10:13 es5M.txt
+/tmp/SAGA:
+total 4
+-rw-r--r-- 1 bdaix bdaix    0 jun 30 10:13 as.txt
+-rw-r--r-- 1 bdaix bdaix    0 jun 30 10:13 es.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 bdaix bdaix 1024 jun 30 10:13 es1k.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 1008
+-rw-r--r-- 1 bdaix bdaix 1024000 jun 30 10:13 es1M.txt
+drwxr-xr-x 2 bdaix bdaix    4096 jun 30 10:13 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 105116
+-rw-r--r-- 1 bdaix bdaix 102400000 jun 30 10:13 es100M.txt
+-rw-r--r-- 1 bdaix bdaix   5120000 jun 30 10:13 es5M.txt
+/tmp/SAGA:
+total 4
+-rw-r--r-- 1 bdaix bdaix    0 jun 30 10:13 as.txt
+-rw-r--r-- 1 bdaix bdaix    0 jun 30 10:13 es2.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 bdaix bdaix 1024 jun 30 10:13 es1k.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 1008
+-rw-r--r-- 1 bdaix bdaix 1024000 jun 30 10:13 es1M.txt
+drwxr-xr-x 2 bdaix bdaix    4096 jun 30 10:13 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 105116
+-rw-r--r-- 1 bdaix bdaix 102400000 jun 30 10:13 es100M.txt
+-rw-r--r-- 1 bdaix bdaix   5120000 jun 30 10:13 es5M.txt
+/tmp/SAGA:
+total 4
+-rw-r--r-- 1 bdaix bdaix    0 jun 30 10:13 es2.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 bdaix bdaix 1024 jun 30 10:13 es1k.txt
+drwxr-xr-x 3 bdaix bdaix 4096 jun 30 10:13 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 1008
+-rw-r--r-- 1 bdaix bdaix 1024000 jun 30 10:13 es1M.txt
+drwxr-xr-x 2 bdaix bdaix    4096 jun 30 10:13 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 105116
+-rw-r--r-- 1 bdaix bdaix 102400000 jun 30 10:13 es100M.txt
+-rw-r--r-- 1 bdaix bdaix   5120000 jun 30 10:13 es5M.txt
+
+
+
+ cleaning Working directory....
+
+
+
+ creating directory tree....
+
+
+
+ creating files....
+
+
+
+ copying file SAGA/es.txt to SAGA/as.txt....
+
+
+
+ renaming file SAGA/es.txt in SAGA/es2.txt....
+
+
+
+
+ deleting file SAGA/as.txt ....
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+#PBS -N zephyr_saga
+#PBS -l cput=00:01:00
+
+cd $PBS_O_WORKDIR
+export MP_EAGER_LIMIT=65536
+date
+NPP=`wc -l $PBS_NODEFILE | awk '{print $1}' `
+echo test sur $NPP procs!
+cat $PBS_NODEFILE > machine.list
+
+/logiciels/mpiib/bin/mpirun -v -machinefile machine.list -np 1 ./zephyr 
+date

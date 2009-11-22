@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttps{wp21-cr-ts01-webas01-tps01}
+
+
+
+%Specify the unique identifier assigned to this test procedure specification.
+%\noindent\textbf{Test log identifier: } %insert file name here without extension '.tex'
+\noindent\textbf{Test design specification reference: \refexpdoc{wp21-cr-ts01-webas01-tds01}}\\
+\noindent\textbf{Test case specification reference: \refexpdoc{wp21-cr-ts01-webas01-tcs01}}\\
+\noindent\textbf{Test log identifier: \refexpdoc{wp21-cr-ts01-webas01-tl01}}
+ %Supply a reference (identifier) to the associated test design specification.
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+%Describe the purpose of this procedure. If this procedure executes any test cases, provide a reference for each
+%of them.
+%In addition, provide references to relevant sections of the test item documentation (e.g., references to usage
+%procedures).
+The purpose of these tests is to see how the checkpointing and restart module will handle a simple counting program as well as a simple text editor \emph{gedit}.
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+
+\paragraph{Installation}
+The test requires a proper Linux system without further modifications. The setup of the checkpointing and restarting functionalities is described under setup.
+
+\paragraph{Log}
+%Describe any special methods or formats for logging the results of test execution, the incidents observed, and
+%any other events pertinent to the test (see Clauses 9 and 10).
+The output of the counting program is logged into a file using the command line. The output of the editor \emph{gedit} is simply described.
+
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+The setup is as follows.\\
+\begin{lstlisting}
+Install BLCR:
+ 	svn+ssh://<login>@scm.gforge.inria.fr/~
+ 	svn/xtreemos/WP2.1/T2/1.4/
+
+ # cd blcr-<VERSION>
+ # chmod 777 autogen.sh
+ # ./autogen.sh
+ # mkdir builddir
+ # cd builddir
+ #../configure
+ # make
+ # make install
+
+Load BLCR modules
+
+# /sbin/insmod 
+/usr/local/lib/blcr/2.6.12-1.234/blcr_imports.ko
+# /sbin/insmod 
+/usr/local/lib/blcr/2.6.12-1.234/blcr_vmadump.ko
+# /sbin/insmod 
+/usr/local/lib/blcr/2.6.12-1.234/blcr.ko
+
+Check that modules have been loaded correctly
+
+# lsmod | grep blcr
+
+Should produce: (if not, try reloading modules again)
+
+blcr                   67728  0
+blcr_vmadump           37528  1 blcr
+blcr_imports           25856  2 blcr,blcr_vmadump
+\end{lstlisting}
+
+\paragraph{Start}
+For the counting example:\\
+\begin{lstlisting}
+(Open new shell - Shell A)
+# cd blcr-0.5.3/builddir/counting
+# cr_run  ./counting
+
+Counting demo starting with <PID>
+Count = 0
+Count = 1
+Count = 2
+Count = 3
+
+(Open new shell - Shell B)
+
+# cr_checkpoint -term <PID>
+\end{lstlisting}
+For the simple text editor \emph{gedit}:\\
+\begin{lstlisting}
+#cr_run ./gedit
+\end{lstlisting}
+
+
+\paragraph{Proceed}
+
+For the counting example:
+\begin{lstlisting}
+(In Shell A)
+... 
+Count = 3
+Terminated
+
+#cr_restart context.<PID>
+
+Count = 4
+Count = 5
+Count = 6
+Count = 7
+\end{lstlisting}
+For the text editor example, we have four different options for a checkpointing. In general, these options are also valid for the counting example but not necessary.
+\begin{lstlisting}
+Option 1:
+#cr_checkpoint -kill <PID>
+#cr_restart context.<PID>
+
+Option 2:
+#cr_checkpoint --save-all --kill <PID>
+#cr_restart context.<PID>
+
+Option 3:
+#cr_checkpoint --save-exe --kill <PID>
+#cr_restart context.<PID>
+
+Option 4:
+# cr_checkpoint --kill --save-private --save-shared <PID>
+# cr_restart context.<PID>
+\end{lstlisting}
+
+\paragraph{Measure}
+%Describe how the test measurements will be made (e.g., describe how remote terminal response time is to be
+%measured using a network simulator).
+The two tests do not require special measurement setups.
+
+\paragraph{Shut Down}
+%Describe the actions necessary to suspend testing, when unscheduled events dictate.
+All tests can be shut down by using the process kill options provided by Linux.
+
+\paragraph{Restart}
+%Identify any procedural restart points and describe the actions necessary to restart the procedure at each of
+%these points.
+A restart is in both cases only meaningful from the beginning. Thus, restart in this case means performing the test again right from the beginning.
+
+\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+The counting example stops after having counted to 100. The text editor has to be stopped manually from the corresponding menu.
+
+\paragraph{Wrap Up}
+%Describe the actions necessary to restore the environment.
+Both tests do not require an explicit wrap up. However, it is meaningful to remove the stored checkpoints after the test in order to keep the hard disc clean.
+
+\paragraph{Contingencies}
+%Describe the actions necessary to deal with anomalous events that may occur during execution.
+In case of anomalies, the applications should simply be restarted.

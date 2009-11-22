@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test case specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\starttcs{wp21-cr-ts01-dbe-tcs01}{Checkpointing a simple Java file-writing application}\\
+%\noindent\textbf{Test case specification identifier: wp21-cr-ts01-dbe-tcs01}%insert file name here without extension '.tex'
+%Purpose:
+%To define a test case identified by a test design specification.
+The main purpose of this test is to know which operations can be checkpointed and restarted and which ones can not. For instance, the
+dbe application is a very intensive application in terms of files, threads and sockets. It also uses advanced Java features such as
+dynamic class loading. We will test progressively if these main features can be checkpointed and restarted easily or if them present
+problems while restarting.
+
+%Outline:
+%A test case specification shall have the following structure:
+%a) Test case specification identifier;
+%b) Test items;
+%c) Input specifications;
+%d) Output specifications;
+%e) Environmental needs;
+%f) Special procedural requirements;
+%g) Intercase dependencies.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test case specification
+%or available to users of the case specification.
+%Since a test case may be referenced by several test design specifications used by different groups over a long
+%time period, enough specific information must be included in the test case specification to permit reuse.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Test Items}
+In an infinite loop this application opens two files stored in the same directory where the application is and writes a string on them. The file names are passed as an argument to the program.
+
+The string to be written in each file is a number that increments its value in each iteration. This number is stored in a static variable in the class. Its initial value is 1.
+
+\subsubsection{Input Specifications}
+
+The input of the application are the names of the files we want to write to.
+
+\subsubsection{Output Specifications}
+
+Two files with a list of numbers form 1 to X. One number is written each second.
+
+\subsubsection{Environmental Needs}
+
+\paragraph{Hardware}
+
+A single x86 machine is required.
+
+\paragraph{Software}
+
+The following software was used:
+\begin{itemize}
+\item Linux kernel 2.6.14-generic
+\item JRE 1.5.0\_10 from Sun
+\item BLCR 0.6.1
+\end{itemize}
+

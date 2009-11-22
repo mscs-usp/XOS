@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test log.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\starttl{wp21-cr-ts01-dbe-tl02}
+%Specify the unique identifier assigned to this test log.
+
+
+%Purpose:
+%To provide a chronological record of relevant details about the execution of tests.
+
+%Outline:
+%A test log shall have the following structure:
+%a) Test log identifier;
+%b) Description;
+%c) Activity and event entries.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test log or available to
+%users of the log.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Description}
+Tests where performed by T6. No more hardware than a linux computer was needed.
+
+\subsubsection{Activity and Event Entries}
+All tests were performed on the 8 November 2007 by T6.
+
+
+%(1) 
+\paragraph{Execution Description}
+%Record the identifier of the test procedure being executed and supply a reference to its specification. Record
+%all personnel present during the execution including testers, operators, and observers. Also indicate the function
+%of each individual.
+see \refexpdoc{wp21-cr-ts01-dbe-tps02}
+
+
+%(2)
+\paragraph{Procedure Results}
+The test failed. Even when the application was able to restart, communication sockets where not valid anymore, and the communication with the clients was lost.
+
+%(3)
+%\paragraph{Environmental Information}
+
+%(4)
+\subsubsection{Anomalous Events}
+The server socket cannot be opened when the application is restarted.
+
+
+%(5)
+\subsubsection{Incident Report Identifiers}
+%Record the identifier of each test incident report, whenever one is generated.
+\refexpdoc{wp21-cr-ts01-dbe-tir02}

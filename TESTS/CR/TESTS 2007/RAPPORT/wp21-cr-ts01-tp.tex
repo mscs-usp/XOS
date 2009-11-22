@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test plan.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\starttp{wp21-cr-ts01-tp}{CR}
+
+
+%done: \fix{this paragraph could be moved down, to "introduction"}
+%Specify the unique identifier assigned to this test plan.
+
+%Purpose:
+%To prescribe the scope, approach, resources, and schedule of the testing activities. To identify the items
+%being tested, the features to be tested, the testing tasks to be performed, the personnel responsible for each
+%task, and the risks associated with this plan.
+
+%Outline:
+%A test plan shall have the following structure:
+%a) Test plan identifier;
+%b) Introduction;
+%c) Test items;
+%d) Features to be tested;
+%e) Features not to be tested;
+%f) Approach;
+%g) Item pass/fail criteria;
+%h) Suspension criteria and resumption requirements;
+%i) Test deliverables; Bernd: we do not use this
+%j) Testing tasks;
+%k) Environmental needs;
+%l) Responsibilities;
+%m) Staffing and training needs; Bernd: we do not use this
+%n) Schedule;
+%o) Risks and contingencies;
+%p) Approvals. Bernd: we do not use this
+%The sections shall be ordered in the specified sequence. Additional sections may be included immediately
+%prior to Approvals.
+%If some or all of the content of a section is in another document, then a reference to that
+%material may be listed in place of the corresponding content. The referenced material must be attached to the
+%test plan or available to users of the plan.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Introduction}
+%Summarize the software items and software features to be tested. The need for each item and its history may
+%be included.
+%References to the following documents, when they exist, are required in the highest level test plan:
+%a) Project authorization;
+%b) Project plan;
+%c) Quality assurance plan;
+%d) Configuration management plan;
+%e) Relevant policies;
+%f) Relevant standards.
+%In multilevel test plans, each lower-level plan must reference the next higher-level plan.
+The checkpointing and restarting mechanisms from WP2.1 (short name:
+wp21-cr) provides a useful functionality of being able to checkpoint a
+whole application. This can be used to make snapshots of the system that
+later can be reused in case it is necessary to restore older states of
+the application. Furthermore, the checkpointing enables the migration of
+applications by checkpointing, transferring the saved state to another
+node, and later restarting the specific application.
+
+\subsubsection{Test Items}
+%Identify the test items including their version/revision level. Also specify characteristics of their transmittal
+%media that impact hardware requirements or indicate the need for logical or physical transformations before
+%testing can begin (e.g., programs must be transferred from tape to disk).
+%Supply references to the following test item documentation, if it exists:
+%a) Requirements specification;
+%b) Design specification;
+%c) Users guide;
+%d) Operations guide;
+%e) Installation guide.
+%Reference any incident reports relating to the test items.
+%Items that are to be specifically excluded from testing may be identified.
+The checkpointer is based on the Berkeley Library Checkpoint/Restart
+module which can be found here (latest version, as of 25-09-07, is 0.6.1):\\
+\begin{center}
+ \mbox{\href{http://ftg.lbl.gov/CheckpointRestart/CheckpointRestart.shtml}{http://ftg.lbl.gov/CheckpointRestart/CheckpointRestart.shtml}}
+\end{center}
+The checkpointer for XtreemOS adds functionality to BLCR so that it can save
+the executable and libraries as part of the checkpoint. The patches to apply these extensions can be obtained from svn:\\
+svn+ssh://scm.gforge.inria.fr/svn/xtreemos/WP2.1/T2.1.4/patchs
+
+
+\subsubsection{Features to be Tested}
+%Identify all software features and combinations of software features to be tested. Identify the test design
+%specification associated with each feature and each combination of features.
+The following features will be tested:
+\begin{itemize}
+\item Current ability to perform checkpointing of applications using BCLR.
+\item Experience when performing checkpointing using new XtreemOS-specific functionality.
+\end{itemize}
+
+\subsubsection{Features not to be Tested}
+%Identify all features and significant combinations of features that will not be tested and the reasons.
+Restarting checkpointed application on other nodes will not be tested at this stage since the current priority is only to establish how different applications react when being checkpointed/restarted. The next phase of experiments will investigate migrations in more detail, assuming that any application issues that cause a problem for the module have been solved.
+
+\subsubsection{Approach}
+%Describe the overall approach to testing. For each major group of features or feature combinations, specify
+%the approach that will ensure that these feature groups are adequately tested. Specify the major activities,
+%techniques, and tools that are used to test the designated groups of features.
+%The approach should be described in sufficient detail to permit identification of the major testing tasks and
+%estimation of the time required to do each one.
+%Specify the minimum degree of comprehensiveness desired. Identify the techniques that will be used to
+%judge the comprehensiveness of the testing effort (e.g., determining which statements have been executed at
+%least once). Specify any additional completion criteria (e.g., error frequency). The techniques to be used to
+%trace requirements should be specified.
+%Identify significant constraints on testing such as test item availability, testing resource availability, and
+%deadlines.
+The aim of these first experiments is to provide early feedback to the developers on any issues that partners identify with the checkpointing and restarting of their applications.
+
+\subsubsection{Item Pass/Fail Criteria}
+%Specify the criteria to be used to determine whether each test item has passed or failed testing.
+The software will pass the tests if the applications can be successfully checkpointed and then restarted. 
+
+\subsubsection{Suspension Criteria and Resumption Requirements}
+%Specify the criteria used to suspend all or a portion of the testing activity on the test items associated with
+%this plan. Specify the testing activities that must be repeated, when testing is resumed.
+Failure in the installation process of the checkpointer and restarting module will mean that the test can not be continued.
+
+\subsubsection{Testing Tasks}
+%Identify the set of tasks necessary to prepare for and perform testing. Identify all intertask dependencies and
+%any special skills required.
+The following list would be considered a typical workflow for performing the current tests:
+\begin{itemize}
+\item Installation of checkpointing and restarting module.
+\item Installation and setup of application.
+\item Running application.
+\item Checkpointing of an application.
+\item Restarting of an application.
+\end{itemize}
+
+\subsubsection{Environmental Needs}
+%Specify both the necessary and desired properties of the test environment. This specification should contain
+%the physical characteristics of the facilities including the hardware, the communications and system software,
+%the mode of usage (e.g., stand-alone), and any other software or supplies needed to support the test.
+%Also specify the level of security that must be provided for the test facilities, system software, and proprietary
+%components such as software, data, and hardware.
+%Identify special test tools needed. Identify any other testing needs (e.g., publications or office space). Identify
+%the source for all needs that are not currently available to the test group.
+Early testing only requires a single machine. The specific environment varies between the different tests. Thus, they are specified in the corresponding test case specifications. In general, all tests require a normal Linux system and the installed checkpointing and restarting module provided by WP2.1.
+
+\subsubsection{Responsibilities}
+%Identify the groups responsible for managing, designing, preparing, executing, witnessing, checking, and
+%resolving. In addition, identify the groups responsible for providing the test items identified in Section 'Test Items'  and the
+%environmental needs identified in Section 'Environmental needs'.
+%These groups may include the developers, testers, operations staff, user representatives, technical support
+%staff, data administration staff, and quality support staff.
+Tests using the SPECweb application will be handled by BSC. SAP uses two test scenarios. In the first one, SAP uses the standard test applications provided from BLCR. In the second case, the standard SAP WebAS will be used. T6 uses DBE, a multithreaded socket based application, to examine the checkpointing/restart behaviour when dealing with remote connections.
+
+\subsubsection{Schedule}
+%Include test milestones identified in the software project schedule as well as all item transmittal events.
+%Define any additional test milestones needed. Estimate the time required to do each testing task. Specify the
+%schedule for each testing task and test milestone. For each testing resource (i.e., facilities, tools, and staff),
+%specify its periods of use.
+Initials tests will be completed before 30-11-07 and the results will be included in deliverable D4.2.4.
+
+\subsubsection{Risks and Contingencies}
+%Identify the high-risk assumptions of the test plan. Specify contingency plans for each (e.g., delayed delivery
+%of test items might require increased night shift scheduling to meet the delivery date).
+No risks are foreseen in testing this component since the BLCR component is stable. The added functionality for XtreemOS may not be stable enough yet for full testing but feedback on how applications currently react to checkpointing should be useful.
+Different JVM versions and JVMs produced by different companies may have very different results therefore it is proposed that support for all JVMs should not be considered; only the latest versions of the most popular.

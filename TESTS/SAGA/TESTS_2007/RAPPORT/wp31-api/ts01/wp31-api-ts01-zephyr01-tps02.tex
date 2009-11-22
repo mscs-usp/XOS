@@ -1,0 +1,260 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test procedure specification.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\subsection{Test Procedure Specification: File Management}
+\starttps{wp31-api-ts01-zephyr01-tps02}
+%Specify the unique identifier assigned to this test procedure specification.
+%\noindent\textbf{Test log identifier: wp31-api-ts01-zephyr01-tl02}
+
+%\noindent\textbf{Test design specification reference: wp31-api-ts01-zephyr01-tds02} 
+
+%Purpose:
+%To specify the steps for executing a set of test cases or, more generally, the steps used to analyze a software
+%item in order to evaluate a set of features.
+
+%Outline:
+%A test procedure specification shall have the following structure:
+%a) Test procedure specification identifier.
+%b) Purpose;
+%c) Special requirements;
+%d) Procedure steps.
+%The sections shall be ordered in the specified sequence. Additional sections, if required, may be included at
+%the end. If some or all of the content of a section is in another document, then a reference to that material
+%may be listed in place of the corresponding content. The referenced material must be attached to the test
+%procedure specification or available to users of the procedure specification.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Purpose}
+%Describe the purpose of this procedure. If this procedure executes any test cases, provide a reference for each
+%of them.
+%In addition, provide references to relevant sections of the test item documentation (e.g., references to usage
+%procedures).
+
+This procedure executes the test case \refexpdoc{wp31-api-ts01-zephyr01-tcs02}.
+
+%\subsubsection{Special Requirements}
+%Identify any special requirements that are necessary for the execution of this procedure. These may include
+%prerequisite procedures, special skills requirements, and special environmental requirements.
+
+
+\subsubsection{Procedure Steps}
+%Include the following steps as applicable.
+
+%\paragraph{Log}
+%Describe any special methods or formats for logging the results of test execution, the incidents observed, and
+%any other events pertinent to the test (see Clauses 9 and 10).
+
+\paragraph{Set Up}
+%Describe the sequence of actions necessary to prepare for execution of the procedure.
+
+%The SAGA library is supposed already installed. If not,
+%please refer to the previous test to test/validate this
+%prerequisite step.
+
+
+ 
+The generic test procedure setup includes:
+\begin{itemize}
+\item Installation and compilation of SAGA.
+\item Compiling and running the test program
+\end{itemize}
+
+Installation and compilation of SAGA on Debian Linux etch
+distribution including the following steps:
+\begin{enumerate}
+ \item Download of Boost 1.34.1 
+ \item Compilation of Boost and manual linking of  a shared library.
+ \item Checking out the 0.6 release of SAGA.
+ \item Compilation of SAGA.
+\end{enumerate}
+
+
+
+\paragraph{Start}
+%Describe the actions necessary to begin execution of the procedure.
+
+
+In order to start the test one needs to perform the following steps:
+\begin{enumerate}
+\item Installation and compilation of SAGA on Debian Linux etch
+distribution : these steps are described in the previous test plan
+      \refexpdoc{wp31-api-ts01-zephyr01-tps01}.
+\item Compile the following simple test program that performs file operation:
+
+\begin{lstlisting}
+#include <iostream>
+#include <saga.hpp>
+
+saga::file  write_file(saga::directory dir,char *name, int size) {
+  char*
+ something="**********...************;
+
+  saga::file file;
+
+  file=dir.open(name,saga::file::Write);
+  for (int s;size>0;size-=1024) {
+    s=1024;
+    if (size<1024) {
+      s=size;
+    }
+     file.write(something,1);
+  }
+  file.close();
+
+  return file;
+}
+
+
+
+/////////////////////////////////
+int main (int argc, char* argv[])
+{
+  
+  printf ("\n\n\n cleaning Working directory....\n");
+  system("rm -rf /tmp/SAGA");
+  
+   // creation of SAGA dir
+  printf ("\n\n\n creating directory tree....\n");
+  saga::directory dir("any://localhost/tmp/SAGA/",saga::file::ReadWrite|saga::file::Create|saga::file::CreateParents);
+  saga::directory dir1k("any://localhost/tmp/SAGA/sup1k",
+			saga::file::ReadWrite|saga::file::Create|saga::file::CreateParents);
+  saga::directory dir1M("any://localhost/tmp/SAGA/sup1k/sup1M",
+			saga::file::ReadWrite|saga::file::Create|saga::file::CreateParents);
+  saga::directory dir5M("any://localhost/tmp/SAGA/sup1k/sup1M/sup5M",
+			saga::file::ReadWrite|saga::file::Create|saga::file::CreateParents);
+
+  system("ls -Rl /tmp/SAGA");
+
+  // create file of different size
+  printf ("\n\n\n creating files....\n");
+  saga::file file=write_file(dir,"es.txt",5);
+  write_file(dir1k,"es1k.txt",1024);
+  write_file(dir1M,"es1M.txt",1024000);
+  write_file(dir5M,"es5M.txt",1024000*5);
+  write_file(dir5M,"es100M.txt",1024000*100);
+  system("ls -Rl /tmp/SAGA");
+
+  
+
+  //copy it
+  printf ("\n\n\n copying file SAGA/es.txt to SAGA/as.txt....\n");
+  file.copy("/tmp/SAGA/as.txt");
+  system("ls -Rl /tmp/SAGA");
+
+  // rename it
+  printf ("\n\n\n renaming file SAGA/es.txt in SAGA/es2.txt....\n");
+  file.move("/tmp/SAGA/es2.txt");
+  system("ls -Rl /tmp/SAGA");
+
+  // erase copy
+  printf ("\n\n\n deleting file SAGA/as.txt ....\n");
+  saga::file file2("/tmp/SAGA/as.txt");
+  file2.remove();
+  system("ls -Rl /tmp/SAGA");
+
+  return 0;
+}
+\end{lstlisting}
+
+using the following makefile
+\begin{lstlisting}
+#  Copyright (c) 2005-2006 Andre Merzky (andre@merzky.net)
+SAGA_ROOT=/home/kortas/SOFTS/BUILD/saga-c++-0.6-src
+
+SAGA_SRC         = main.cpp
+SAGA_BIN         = main
+
+SAGA_ADD_BIN_OBJ = $(SAGA_SRC:%.cpp=%.o)
+
+include $(SAGA_ROOT)/make/saga.application.mk
+\end{lstlisting}
+
+ \item Finally run the test program
+\begin{lstlisting}
+ export LD_LIBRARY_PATH=/home/kortas/SOFTS/saga-06/lib:\
+	/home/kortas/SOFTS/boost_34_1/lib:$LD_LIBRARY_PATH:
+ export SAGA_LOCATION=/home/kortas/SOFTS/saga-06/
+ ./main
+\end{lstlisting}
+\end{enumerate}
+
+As a comparison element, here is the equivalent shell script. 
+\label{api:file_script}
+\begin{lstlisting}
+echo cleaning Working directory....
+\rm -rf /tmp/SAGA
+
+echo
+echo
+echo creating directory tree....
+mkdir -p /tmp/SAGA/sup1k/sup1M/sup5M
+ls -l -R /tmp/SAGA 
+
+# creation source file
+python -c "print '*'*1024*100" > /tmp/source
+
+# creation 10, 1k, 1M and 5M files
+
+echo
+echo
+echo creating files...
+
+dd count=1 bs=1024 if=/tmp/source  of=/tmp/SAGA/es.txt
+dd count=1 bs=1k   if=/tmp/source  of=/tmp/SAGA/sup1k/es1k.txt
+dd count=1 bs=1M   if=/tmp/source  of=/tmp/SAGA/sup1k/sup1M/es1M.txt
+dd count=1 bs=5M   if=/tmp/source  of=/tmp/SAGA/sup1k/sup1M/sup5M/es5M.txt
+
+ls -l -R /tmp/SAGA 
+
+echo
+echo
+echo copying file SAGA/es.txt to SAGA/as.txt....
+cp /tmp/SAGA/es.txt  /tmp/SAGA/as.txt 
+ls -l -R /tmp/SAGA
+
+echo
+echo
+echo renaming file SAGA/es.txt in SAGA/es2.txt....
+mv /tmp/SAGA/es.txt  /tmp/SAGA/es2.txt 
+ls -l -R /tmp/SAGA
+
+echo
+echo
+echo deleting file SAGA/as.txt
+rm /tmp/as.txt
+
+ls -l -R /tmp/SAGA
+\end{lstlisting}
+
+%\paragraph{Proceed}
+%Describe any actions necessary during execution of the procedure.
+
+%\paragraph{Measure}
+%Describe how the test measurements will be made (e.g., describe how remote terminal response time is to be
+%measured using a network simulator).
+
+%\paragraph{Shut Down}
+%Describe the actions necessary to suspend testing, when unscheduled events dictate.
+
+%\paragraph{Restart}
+%Identify any procedural restart points and describe the actions necessary to restart the procedure at each of
+%these points.
+
+%\paragraph{Stop}
+%Describe the actions necessary to bring execution to an orderly halt.
+
+
+%\paragraph{Wrap Up}
+%Describe the actions necessary to restore the environment.
+
+
+%\paragraph{Contingencies}
+%Describe the actions necessary to deal with anomalous events that may occur during execution.
+%\label{api:contingencies}
+
+

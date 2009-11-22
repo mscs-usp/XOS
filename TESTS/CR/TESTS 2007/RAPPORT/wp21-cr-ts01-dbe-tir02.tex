@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test incident report.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\starttir{wp21-cr-ts01-dbe-tir02}{Problem with open sockets}
+%Specify the unique identifier assigned to this test incident report.
+%\noindent\textbf{Test incident report identifier: wp21-cr-ts01-dbe-tir02}%insert file name here without extension '.tex'
+
+\subsubsection{Summary}
+
+The application can restart correctly, but a set of errors related to server sockets are produced.
+
+
+\subsubsection{Incident Description}
+When the application restarts, the server socket cannot be opened (probably an identifier deleted by the kernel).
+
+The error message is related to Java classes, and it indicates that the socket identifier is not available anymore.
+
+\subsubsection{Impact}
+%If known, indicate what impact this incident will have on test plans, test design specifications, test procedure
+%specifications, or test case specifications.
+The main application would have be changed in order to cope with this issue. The failure in open server sockets would have to be controlled by the application, reopening it in case the binding fails.

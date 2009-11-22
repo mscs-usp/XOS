@@ -1,0 +1,52 @@
+\section{Evaluation of Checkpoint and Restart}
+
+%Tests will be done with maxDB/WEBAS, DBE, SPECWEB.\\
+%Responsible for tests and documentation: Gary/Carsten (SAP), Javier (T6) and Kevin (BSC)\\
+%Coordinator: Kevin (BSC).\\
+
+%here enter brief introduction: name of component, description, WP responsible...
+The checkpoint/restart module for XtreemOS is being developed by WP 2.1. This component is based on Berkeley Lab Checkpoint/Restart (BLCR) which is a kernel module that allows for checkpointing single processes and parallel applications. More information can be found here:\\
+http://ftg.lbl.gov/CheckpointRestart/CheckpointRestart.shtml
+
+Additional functionality needs to be added for the gridified environment envisioned by XtreemOS and will be carried out by WP2.1. One part of the work will be so that executable code and auxiliary libraries can be included as part of the checkpoint. This will enable it to be migrated to other heterogeneous machines, which make up a part of the the grid running the same OS, but still retain its original environment. Various other issues such as name caching, dealing with open files and allowing several different ways to be launched will have to be addressed so that XtreemOS can benefit fully from the scheduling and fault tolerant advantages that such a component can provide.\\
+
+The preliminary tests detailed below may not be able to delve too deeply into the usage features of the checkpoint/restart module at this point in time, since there is still ongoing development work on the component to add some core functionalities for XtreemOS. Nevertheless, it is hoped that these first results will be of use to the developers; helping to put what is required from the component in context and also helping to pinpoint some of the key functionality that is required from the wide range of applications we have chosen to help with the experimentation and evaluation process. As the component matures, the experimentation plans will be expanded to cover the new functionality, and the dialogue with the developers in WP2.1 will be maintained throughout.\\
+%
+%%first, one test plan
+\inputexpfile{wp21-cr-ts01-tp.tex}
+%depending on the test plan, the following documents may be used multiple times, please arrange in meaningful order
+
+%BSC's experimentation of checkpointer with SPECweb
+\inputexpfile{wp21-cr-ts01-spec01-tds01.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tcs01.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tps01.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tl01.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tir01.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tcs02.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tps02.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tl02.tex}
+\inputexpfile{wp21-cr-ts01-spec01-tir02.tex}
+
+%%SAP's experimentation of checkpointer with WebAS
+\inputexpfile{wp21-cr-ts01-webas01-tds01.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tcs01.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tps01.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tl01.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tir01.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tcs02.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tps02.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tl02.tex}
+\inputexpfile{wp21-cr-ts01-webas01-tir02.tex}
+
+%%T6's experimentation of checkpointer with DBE
+\inputexpfile{wp21-cr-ts01-dbe-tds01.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tcs01.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tps01.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tl01.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tcs02.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tps02.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tl02.tex}
+\inputexpfile{wp21-cr-ts01-dbe-tir02.tex}
+
+%finally, one test summary report
+\inputexpfile{wp21-cr-ts01-tsr.tex}

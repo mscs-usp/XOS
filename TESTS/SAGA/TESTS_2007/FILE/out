@@ -1,0 +1,198 @@
+/tmp/SAGA:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1k
+
+/tmp/SAGA/sup1k:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 4
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:22 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 0
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:22 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:22 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:22 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:22 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:22 es5M.txt
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:22 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:22 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:22 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:22 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:22 es5M.txt
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:22 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:22 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:22 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:22 es5M.txt
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:22 sup1k
+
+
+
+
+ cleaning Working directory....
+
+
+
+ creating directory tree....
+/tmp/SAGA:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 4
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 0
+
+
+
+ creating files....
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+
+
+ copying file SAGA/es.txt to SAGA/as.txt....
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+
+
+ renaming file SAGA/es.txt in SAGA/es2.txt....
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+
+
+ deleting file SAGA/as.txt ....
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+real	0m11.977s
+user	0m6.108s
+sys	0m5.256s

@@ -1,0 +1,114 @@
+which parameters to vary, 
+      - saving period : we take a chekpoint every n second
+      - number of times needed to restore an execution
+      - number of processes and machines implied in the C/R process
+      - type of the breakdown : a machine crashes
+      - size of saving files
+      - type of the application : standalone on one node, distributed, with or no comm
+      - type of the work done by the application during the crash : writing a file, communication
+
+which values to measure
+      - success of the C/R : cheching if results are correct
+      - overhead of the C/R process
+      
+
+Questions :
+	- how to "kill" a program
+
+Three type of breakdown
+      - kill -9, a more prioritary application has come
+      - scheduled maintenance with a clean halt
+      - brutal halt of the machine (ie power failure)
+
+Functional tests : is it working or not?
+
+
+performance tests : scalability, comparison with what?
+
+
+
+planning Tests :
+
+Zephyr 
+
+Case 1 
+     -
+     - one processor
+     - long time run, no file, 
+
+T1.1 Nominal Test
+     - Zephyr is running
+     - halting and restarting  the node executing zephyr
+     - checking if the result obtained is correct (same convergence result)
+       
+
+T1.2 estimating overhead of C/R for a code that isn't crashed
+     - running the problem with and without C/R support -> estimating overhead of BLCR on the execution time for nominal case (performing measures for different problem size)
+
+
+T1.3 estimating overhead of restauration
+     - start timer
+     - run Zephyr
+     - crash the node
+     - stop timer
+     - restart node
+     - restart timer
+     - retart zephyr
+     - stop timer
+     - estimate the overhead of the C/R process comparing with a nominal run
+
+T1.3 estimating stability of C/R
+     - reproduce 10 times T1 and T2, check values
+
+T1.3 estimating scalability of C/R
+     - reproduce T1 with and with no C/R  with a growing size of problem Zephyr solves.
+       estimate overhead 
+
+
+Case 2
+     - one processor
+     - saving results regurlarly
+
+T2.1 C/R while writing a file
+     - Zephyr is running, writing huge data into a file
+     - halting and restarting  the node executing zephyr while we're sure it's writing
+     - restarting  the node and check if zephyr execution s restored
+     - checking if the result obtained is correct (same convergence result)
+
+
+
+Case 3 
+     - 4 processors communicating 
+     - no result saved
+
+T3.1 C/R with 1 proc out of 4 that fails : node 0 fails
+     - Zephyr is running on 4 processors
+     - halting and restarting  the node 0 executing zephyr 
+     - restarting  the node 0 and check if zephyr execution s restored
+     - checking if the result obtained is correct (same convergence result)
+
+T3.2 C/R with 1 proc out of 4 that fails : node 2 fails
+     - Zephyr is running on 4 processors
+     - halting and restarting  the node 1 executing zephyr 
+     - restarting  the node 1 and check if zephyr execution s restored
+     - checking if the result obtained is correct (same convergence result)
+
+
+Case 4
+     - MMI python application
+
+T4.1 : C/R on graphical interface
+     - start the MMI
+     - tick some boxes, and entering some values in input fields
+     - crash the machine
+     - restart it
+     - check if graphical interface is back in its precedent state
+
+Case 5
+     - migrating a task after a restart
+
+Test 5.1 : Checkpoint on one machine, restart on the other
+
+
+Case 6
+     - C/R in the case of nodes hot plugged to the grid

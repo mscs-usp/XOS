@@ -1,0 +1,59 @@
+Test d'installation sur calibre 5 le 04/05/09
+
+
+export SRC=/home/kortas/SOFTS/SRC
+export BUILD=/local00/kortas/BUILD
+export INSTALL=/local00/kortas/SOFTS
+
+#installation boost
+
+
+cd $BUILD
+tar xvfj $SRC/SAGA/boost_1_38_0.tar.bz2 
+cd boost_1_38_0/
+export PATH=/logiciels/public/gcc-4.0.2/bin/:$PATH
+./configure --prefix=$INSTALL/boost_1_38_0
+make -j 8 all
+make install
+
+
+
+#Installation saga 1.2.1
+
+cd $BUILD
+tar xvfj $SRC/SAGA/Python-2.5.4.tar.bz2
+cd Python-2.5.4
+export PATH=/logiciels/public/gcc-4.0.2/bin/:$PATH
+./configure --with-boost=$INSTALL/boost_1_38_0 --prefix=/local00/kortas/Python-2.5.4
+make -j 8
+make install
+
+
+
+
+cd $BUILD
+tar xvfj $SRC/SAGA/saga-cpp-1.2.1.src.tar.bz2 
+cd saga-cpp-1.2.1.src
+export PATH=$BUILD/Python-2.5.4:/logiciels/public/gcc-4.0.2/bin/:$PATH
+export LD_LIBRARY_PATH=$INSTALL/boost_1_38_0/lib:$LD_LIBRARY_PATH
+./configure --prefix=$INSTALL/saga-cpp-1.2.1 --with-boost=$INSTALL/boost_1_38_0
+make -j 8
+
+# resultat 
+Tentative en echec 
+
+-> pas de binding python actifs apres le configure de saga
+-> compilation en echec de saga
+
+      binlinking   test_helper
+/local00/kortas/BUILD/saga-cpp-1.2.1.src/saga/impl/engine/libsaga_engine.so: référence indéfinie vers « boost::mutex::do_lock()   »
+/local00/kortas/BUILD/saga-cpp-1.2.1.src/saga/impl/engine/libsaga_engine.so: référence indéfinie vers « boost::call_once(void (*)(), int&)»
+/local00/kortas/BUILD/saga-cpp-1.2.1.src/saga/impl/engine/libsaga_engine.so: référence indéfinie vers « boost::mutex::do_unlock()   »
+collect2: ld a retourné 1 code d'état d'exécution
+make[3]: *** [test_helper] Erreur 1
+make[2]: *** [test_helper] Erreur 2
+make[1]: *** [cpp] Erreur 2
+make: *** [test] Erreur 2
+
+
+

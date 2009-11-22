@@ -1,0 +1,112 @@
+Mon Dec 10 11:53:25 CET 2007
+test sur 1 procs!
+running /home/kortas/XTREEMOS/TESTS/SAGA/JOB/ZEPHYR/./zephyr on 1 LINUX ch_gen2 processors
+  Initialization successfully completed for            1  tasks
+ ***********************************
+ *                                 *
+ *  Alize v 0.4 (10 Janvier 1997)  *
+ *                                 *
+ ***********************************
+ >> 
+ >> Execution sur : ????
+ >> 
+ >> Solution test :   Bipole
+ >>
+ >> Viscosite     :     0.100000000000000     
+ >>
+ >> tau         =   3.125000000000000E-003
+ >> dx          =   1.953125000000000E-003        ou lm =          511
+ >> dy          =   1.953125000000000E-003        ou nm =          511
+ >>
+ >> Maillage     --> grille B  
+ >>
+ >> Termes diffusifs  traites implicitement
+ >> Termes convectifs traites implicitement
+ >> Guess Initial --> Richardson
+ >>
+ >> integration temporelle d'ordre  :            4
+ >>
+ >> Solveur                         : BiCGSTAB_1(DF2)
+ >>
+ >> 
+ >> Convergence externe             :   1.000000000000000E-018
+ >> Convergence externe abs         :   1.000000000000000E-010
+ >>
+ >> ===============================================================================
+ >>
+ >> task/nbgrid :      0                0
+ >>
+ >> lmu/lmu_ddm :    511                0
+ >>
+ >> nmu/nmu_ddm :    511                0
+ >>
+ >>
+ >> lmv/lmv_ddm :    511                0
+ >>
+ >> nmv/nmv_ddm :    511                0
+ >>
+ >> ===============================================================================
+ >>
+
+===================================================================================
+                 t=   0.00000000000000       (it=           0 ) 
+===================================================================================
+ Erreur Linfini      -->  err    =   0.8674E-17  0.6395E-17  0.4261E-18  0.9592E-18
+                     -->  errvtu =   0.8674E-17  0.6395E-17  0.3013E-18  0.9592E-18
+                     -->  errvtv =   0.8674E-17  0.6395E-17  0.3013E-18  0.9592E-18
+ Reynolds de Maille  -->  Rh     =   0.2649E-01
+                     -->  Rh(x)  =   0.2649E-01
+                     -->  Rh(y)  =   0.2649E-01
+===================================================================================
+
+ task   0 Timer   2 Cpu Time :       0.00 seconds/all          NaN seconds/iteration   
+ task   0 Timer   1 Cpu Time :       0.00 seconds/all          NaN seconds/iteration   
+ task   0 Timer   0 Cpu Time :       0.00 seconds/all          NaN seconds/iteration   
+
+===================================================================================
+                 t=  3.125000000000000E-003  (it=           1 ) 
+===================================================================================
+ Erreur Linfini      -->  err    =   0.6008E-06  0.4430E-06  0.1166E-06  0.2605E-06
+                     -->  errvtu =   0.6008E-06  0.4430E-06  0.1026E-06  0.3240E-06
+                     -->  errvtv =   0.4331E-06  0.3193E-06  0.5552E-07  0.1754E-06
+ Reynolds de Maille  -->  Rh     =   0.2649E-01
+                     -->  Rh(x)  =   0.2649E-01
+                     -->  Rh(y)  =   0.2649E-01
+===================================================================================
+ >>                                  CONVERGENCE
+===================================================================================
+ >>         niveau  1   : total / nb_ap =        moy       max       min      last
+ >>         iteration :     154 /     1 =        154       154       154       154
+-----------------------------------------------------------------------------------
+ >>                   :      moy      max      min     last     resf     resl
+ >>         rayon cv  :   0.87E+00 0.87E+00 0.87E+00 0.87E+00 0.22E+00 0.94E-10
+===================================================================================
+
+ task   0 Timer   2 Cpu Time :       0.00 seconds/all   .00000E+00 seconds/iteration   
+ task   0 Timer   1 Cpu Time :       0.00 seconds/all   .00000E+00 seconds/iteration   
+ task   0 Timer   0 Cpu Time :      31.25 seconds/all   .20292E+00 seconds/iteration   
+
+===================================================================================
+                 t=  1.250000000000000E-002  (it=           4 ) 
+===================================================================================
+ Erreur Linfini      -->  err    =   0.3992E-05  0.2943E-05  0.7578E-06  0.1655E-05
+                     -->  errvtu =   0.3992E-05  0.2943E-05  0.6815E-06  0.2104E-05
+                     -->  errvtv =   0.2384E-05  0.1758E-05  0.3315E-06  0.1024E-05
+ Reynolds de Maille  -->  Rh     =   0.2649E-01
+                     -->  Rh(x)  =   0.2649E-01
+                     -->  Rh(y)  =   0.2649E-01
+===================================================================================
+ >>                                  CONVERGENCE
+===================================================================================
+ >>         niveau  1   : total / nb_ap =        moy       max       min      last
+ >>         iteration :     617 /     4 =        154       159       148       156
+-----------------------------------------------------------------------------------
+ >>                   :      moy      max      min     last     resf     resl
+ >>         rayon cv  :   0.87E+00 0.87E+00 0.86E+00 0.87E+00 0.19E+00 0.91E-10
+===================================================================================
+
+ task   0 Timer   2 Cpu Time :       0.00 seconds/all   .00000E+00 seconds/iteration   
+ task   0 Timer   1 Cpu Time :       0.00 seconds/all   .00000E+00 seconds/iteration   
+ task   0 Timer   0 Cpu Time :      77.13 seconds/all   .12500E+00 seconds/iteration   
+  END OF SIMULATION 
+Mon Dec 10 11:55:01 CET 2007

@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for describing the test log.
+% structure and annotations are quoted from IEEE Std 829-1998
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection{Test log: File Management}
+\starttl{wp31-api-ts01-zephyr01-tl02}
+%Specify the unique identifier assigned to this test log.
+%\noindent\textbf{Test log identifier: wp31-api-ts01-zephyr01-tl02}%insert file name here without extension '.tex'
+
+
+
+%Purpose:
+%To provide a chronological record of relevant details about the execution of tests.
+
+%Outline:
+%A test log shall have the following structure:
+%a) Test log identifier;
+%b) Description;
+%c) Activity and event entries.
+%The sections shall be ordered in the specified sequence. Additional sections may be included at the end. If
+%some or all of the content of a section is in another document, then a reference to that material may be listed
+%in place of the corresponding content. The referenced material must be attached to the test log or available to
+%users of the log.
+%Details on the content of each section are contained in the following subclauses.
+
+
+\subsubsection{Description}
+%Information that applies to all entries in the log except as specifically noted in a log entry should be included
+%here. The following information should be considered:
+
+%a) Identify the items being tested including their version/revision levels. For each of these items, supply
+%a reference to its transmittal report, if it exists.
+%b) Identify the attributes of the environments in which the testing is conducted. Include facility identifi-
+%cation, hardware being used (e.g., amount of memory being used, CPU model number, and number
+%and model of tape drives, and/or mass storage devices), system software used, and resources available
+%(e.g., the amount of memory available).
+
+This test has been done in the hardware and software environment
+described in \refexpdoc{api:env} 
+
+It consists in using SAGA API to handle files (creation, renaming, copy,
+or deletion) in a directory tree.
+
+
+
+
+\subsubsection{Activity and Event Entries}
+%For each event, including the beginning and end of activities, record the occurrence date and time along with
+%the identity of the author.
+%The information in (1) through (5) should be considered:
+
+%(1) 
+%\paragraph{Execution Description}
+%Record the identifier of the test procedure being executed and supply a reference to its specification. Record
+%all personnel present during the execution including testers, operators, and observers. Also indicate the function
+%of each individual.
+
+The tests described here have been conducted by Samuel Kortas (EDF). The
+execution procedure is described in specification
+\refexpdoc{wp31-api-ts01-zephyr01-tps02}.
+
+%(2)
+%\paragraph{Procedure Results}
+%For each execution, record the visually observable results (e.g., error messages generated, aborts, and
+%requests for operator action). Also record the location of any output (e.g., reel number). Record the successful
+%or unsuccessful execution of the test.
+
+
+\subsubsection{Execution of the test program}
+
+Calling the test program several times, after a ``touch es.txt'',
+the following correct
+ output is always produced:
+
+\begin{small}
+\begin{lstlisting}
+ cleaning Working directory....
+ creating directory tree....
+/tmp/SAGA:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 4
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 4
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 0
+
+ creating files....
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+ copying file SAGA/es.txt to SAGA/as.txt....
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+ renaming file SAGA/es.txt in SAGA/es2.txt....
+/tmp/SAGA:
+total 12
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 as.txt
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+ deleting file SAGA/as.txt ....
+/tmp/SAGA:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es2.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1k
+
+/tmp/SAGA/sup1k:
+total 8
+-rw-r--r-- 1 kortas edf    1 2007-12-13 10:23 es1k.txt
+drwxr-xr-x 3 kortas edf 4096 2007-12-13 10:23 sup1M
+
+/tmp/SAGA/sup1k/sup1M:
+total 8
+-rw-r--r-- 1 kortas edf 1000 2007-12-13 10:23 es1M.txt
+drwxr-xr-x 2 kortas edf 4096 2007-12-13 10:23 sup5M
+
+/tmp/SAGA/sup1k/sup1M/sup5M:
+total 112
+-rw-r--r-- 1 kortas edf 100000 2007-12-13 10:23 es100M.txt
+-rw-r--r-- 1 kortas edf   5000 2007-12-13 10:23 es5M.txt
+
+real	0m11.977s
+user	0m6.108s
+sys	0m5.256s
+\end{lstlisting}
+ \end{small}
+
+
+
+We checked that the file produced (as.txt) was the copy of the 
+initial file (es.txt). Results obtained are the same as if
+the equivalent shell script \refexpdoc{api:file_script} is run.
+
+
+The observed time is always around 12 seconds to run the C++ test
+application on this system.
+
+Summary: We consider the test as passed.
+Using Saga, one could easily create, rename, delete a file.
+
+%(3)
+%\paragraph{Environmental Information}
+%Record any environmental conditions specific to this entry (e.g., hardware substitutions).
+
+%(4)
+%\subsubsection{Anomalous Events}
+%Record what happened before and after an unexpected event occurred (e.g., A summary display was
+%requested and the correct screen displayed, but response seemed unusually long. A repetition produced the
+%same prolonged response). Record circumstances surrounding the inability to begin execution of a test
+%procedure or failure to complete a test procedure (e.g., a power failure or system software problem).
+
+
+
+
+
+
+%(5)
+%\subsubsection{Incident Report Identifiers}
+%Record the identifier of each test incident report, whenever one is generated.
+

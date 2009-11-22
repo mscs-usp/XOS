@@ -1,0 +1,51 @@
+echo cleaning Working directory....
+\rm -rf /tmp/SAGA
+
+echo
+echo
+echo creating directory tree....
+mkdir -p /tmp/SAGA/sup1k/sup1M/sup5M
+ls -l -R /tmp/SAGA 
+
+# creation source file
+python -c "print '*'*1024*100" > /tmp/source
+
+# creation 10, 1k, 1M and 5M files
+
+echo
+echo
+echo creating files...
+
+dd count=1 bs=1024 if=/tmp/source  of=/tmp/SAGA/es.txt
+dd count=1 bs=1k   if=/tmp/source  of=/tmp/SAGA/sup1k/es1k.txt
+dd count=1 bs=1M   if=/tmp/source  of=/tmp/SAGA/sup1k/sup1M/es1M.txt
+dd count=1 bs=5M   if=/tmp/source  of=/tmp/SAGA/sup1k/sup1M/sup5M/es5M.txt
+
+ls -l -R /tmp/SAGA 
+
+echo
+echo
+echo copying file SAGA/es.txt to SAGA/as.txt....
+cp /tmp/SAGA/es.txt  /tmp/SAGA/as.txt 
+ls -l -R /tmp/SAGA
+
+echo
+echo
+echo renaming file SAGA/es.txt in SAGA/es2.txt....
+mv /tmp/SAGA/es.txt  /tmp/SAGA/es2.txt 
+ls -l -R /tmp/SAGA
+
+echo
+echo
+echo deleting file SAGA/as.txt
+rm /tmp/as.txt
+
+ls -l -R /tmp/SAGA
+
+
+
+
+
+
+
+
